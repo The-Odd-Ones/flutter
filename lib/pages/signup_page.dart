@@ -1,0 +1,158 @@
+import 'package:community/pages/login_page.dart';
+import 'package:community/pages/homePage.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../provider/user_provider.dart';
+import 'dart:convert';
+
+class SignUp extends StatefulWidget {
+  const SignUp({Key key}) : super(key: key);
+  static const routeName = '/signup';
+
+  @override
+  _SignUpState createState() => _SignUpState();
+}
+
+class _SignUpState extends State<SignUp> {
+  final GlobalKey<FormState> _formKey = GlobalKey();
+  Map _authData = {
+    'username': '',
+    'firstname': '',
+    'lastname': '',
+    'email': '',
+    'password': '',
+  };
+
+  String _validateEmail(String value) {
+    if (value.isEmpty) {
+      // The form is empty
+      return "Enter email address";
+    }
+    // This is just a regular expression for email addresses
+    String p = "[a-zA-Z0-9\+\.\_\%\-\+]{1,256}" +
+        "\\@" +
+        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}" +
+        "(" +
+        "\\." +
+        "[a-zA-Z0-9][a-zA-Z0-9\\-]{0,25}" +
+        ")+";
+    RegExp regExp = new RegExp(p);
+
+    if (regExp.hasMatch(value)) {
+      // So, the email is valid
+      return null;
+    }
+
+    // The pattern of the email didn't match the regex above.
+    return 'Email is not valid';
+  }
+
+  void saveForm() async {
+    if (!_formKey.currentState.validate()) {
+      // Invalid!
+      return;
+    }
+    _formKey.currentState.save();
+    // print(_authData);
+    try {
+      await Provider.of<UserProvider>(context, listen: false).signup(
+          _authData['username'],
+          _authData['firstname'],
+          _authData['lastname'],
+          _authData['email'],
+          _authData['password']);
+      Navigator.of(context).pushReplacementNamed(Home.routeName);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Sign Up'),
+      ),
+      body: Center(
+        child: Form(
+            key: _formKey,
+            child: ListView(
+              children: <Widget>[
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'UserName'),
+                  textInputAction: TextInputAction.next,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some User Name';
+                    }
+                    return null;
+                  },
+                  onSaved: (val) {
+                    _authData['username'] = val;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'first Name'),
+                  textInputAction: TextInputAction.next,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some first Name';
+                    }
+                    return null;
+                  },
+                  onSaved: (val) {
+                    _authData['firstname'] = val;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'last Name'),
+                  textInputAction: TextInputAction.next,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please enter some last Name';
+                    }
+                    return null;
+                  },
+                  onSaved: (val) {
+                    _authData['lastname'] = val;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Email'),
+                  textInputAction: TextInputAction.next,
+                  validator: _validateEmail,
+                  onSaved: (val) {
+                    _authData['email'] = val;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'password'),
+                  obscureText: true,
+                  textInputAction: TextInputAction.done,
+                  validator: (value) {
+                    if (value.isEmpty || value.length < 6) {
+                      return 'Please enter some password';
+                    }
+                    return null;
+                  },
+                  onSaved: (val) {
+                    _authData['password'] = val;
+                  },
+                ),
+                RaisedButton(
+                    child: Text('Register'),
+                    onPressed: () {
+                      saveForm();
+                    }),
+                RaisedButton(
+                    child: Text('I have a account'),
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed(Login.routeName);
+                    })
+              ],
+            )),
+      ),
+    );
+  }
+}
