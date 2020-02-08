@@ -1,0 +1,39 @@
+import 'package:community/pages/auth.dart';
+import 'package:community/pages/homePage.dart';
+import 'package:community/pages/signup_page.dart';
+import 'package:community/pages/splash_screen.dart';
+import 'package:community/provider/user_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import './pages/login_page.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+        providers: [ChangeNotifierProvider.value(value: UserProvider())],
+        child: Consumer<UserProvider>(
+          builder: (context, auth, _) => MaterialApp(
+            home: auth.isAuth
+                ? Home()
+                : FutureBuilder(
+                    future: auth.tryAutoLogin(),
+                    builder: (context, authResultSnapshot) =>
+                        authResultSnapshot.connectionState ==
+                                ConnectionState.waiting
+                            ? SplashScreen()
+                            : Auth(),
+                  ),
+            routes: {
+              Home.routeName: (context) => Home(),
+              Login.routeName: (context) => Login(),
+              SignUp.routeName: (context) => SignUp()
+            },
+          ),
+        ));
+  }
+}
