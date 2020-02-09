@@ -12,8 +12,8 @@ class UserProvider with ChangeNotifier {
   String _userId;
   String _username;
 
-  String _firstName;
-  String _lastName;
+  String _firstname;
+  String _lastname;
   String _email;
 
   bool get isAuth {
@@ -45,13 +45,14 @@ class UserProvider with ChangeNotifier {
       final resultData = json.decode(result.body);
       if (resultData['success'] == true) {
         _token = resultData['token'];
-        _userId = resultData['user']['_id'];
-        _username = resultData['user']['userName'];
-        _firstName = resultData['user']['firstName'];
-        _lastName = resultData['user']['lastName'];
-        _email = resultData['user']['email'];
+        final userResult = resultData['user'];
+        _userId = userResult['_id'];
+        _username = userResult['username'];
+        _firstname = userResult['firstname'];
+        _lastname = userResult['lastname'];
+        _email = userResult['email'];
         _saveUserData(
-            _token, _userId, _username, _firstName, _lastName, _email);
+            _token, _userId, _username, _firstname, _lastname, _email);
       } else {
         throw HttpException(resultData['msg']);
       }
@@ -76,20 +77,38 @@ class UserProvider with ChangeNotifier {
 
       if (resultData['success'] == true) {
         _token = resultData['token'];
-        _userId = resultData['user']['_id'];
-        _username = resultData['user']['userName'];
-        _firstName = resultData['user']['firstName'];
-        _lastName = resultData['user']['lastName'];
-        _email = resultData['user']['email'];
-        _saveUserData(
-            _token, _userId, _username, _firstName, _lastName, _email);
-        print(_username);
+        final userResult = resultData['user'];
+        _userId = userResult['_id'];
+        _username = userResult['username'];
+        _firstname = userResult['firstname'];
+        _lastname = userResult['lastname'];
+        _email = userResult['email'];
+        // _saveUserData(
+        //     _token, _userId, _username, _firstname, _lastname, _email);
+
+        final prefs = await SharedPreferences.getInstance();
+        final key = 'userDate';
+        final userData = json.encode({
+          'token': _token,
+          'userId': _userId,
+          'username': _username,
+          'firstname': _firstname,
+          'lastname': _lastname,
+          'email': _email,
+        });
+        print(userData);
+        prefs.setString(key, userData);
+
+        // final extractedUserData =
+        //     json.decode(prefs.getString('userData')) as Map;
+        // print(extractedUserData);
       } else {
         throw HttpException(resultData['msg']);
       }
     } catch (e) {
       throw e;
     }
+
     notifyListeners();
   }
 
@@ -97,26 +116,28 @@ class UserProvider with ChangeNotifier {
     _token = null;
     _userId = null;
     _username = null;
-    _firstName = null;
-    _lastName = null;
+    _firstname = null;
+    _lastname = null;
     _email = null;
     notifyListeners();
     final prefs = await SharedPreferences.getInstance();
-    prefs.remove('token');
+
+    prefs.clear();
   }
 
   Future<bool> tryAutoLogin() async {
     final prefs = await SharedPreferences.getInstance();
+    final key = 'userDate';
     if (!prefs.containsKey('userDate')) {
       return false;
     }
-    final extractedUserData = json.decode(prefs.getString('userData'));
-
+    final extractedUserData = json.decode(prefs.getString(key)) as Map;
+    print(extractedUserData);
     _token = extractedUserData['token'];
     _userId = extractedUserData['userId'];
     _username = extractedUserData['username'];
-    _firstName = extractedUserData['firstname'];
-    _lastName = extractedUserData['lastname'];
+    _firstname = extractedUserData['firstname'];
+    _lastname = extractedUserData['lastname'];
     _email = extractedUserData['email'];
     notifyListeners();
     return true;
@@ -124,7 +145,7 @@ class UserProvider with ChangeNotifier {
 
   _saveUserData(String token, String userId, String username, String firstname,
       String lastname, String email) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     final key = 'userDate';
     final userData = json.encode({
       'token': token,

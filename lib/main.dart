@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [ChangeNotifierProvider.value(value: UserProvider())],
         child: Consumer<UserProvider>(
-          builder: (context, auth, _) => MaterialApp(
-            home: auth.isAuth
+          builder: (context, userProvider, _) => MaterialApp(
+            home: userProvider.isAuth
                 ? Home()
                 : FutureBuilder(
-                    future: auth.tryAutoLogin(),
+                    future: userProvider.tryAutoLogin(),
                     builder: (context, authResultSnapshot) =>
                         authResultSnapshot.connectionState ==
                                 ConnectionState.waiting
