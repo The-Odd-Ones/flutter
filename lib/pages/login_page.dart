@@ -1,3 +1,4 @@
+import 'package:community/models/http_exception.dart';
 import 'package:community/pages/homePage.dart';
 import 'package:community/pages/signup_page.dart';
 import 'package:community/provider/user_provider.dart';
@@ -93,8 +94,25 @@ class _LoginState extends State<Login> {
       await Provider.of<UserProvider>(context, listen: false)
           .login(_authData['username'], _authData['password']);
       Navigator.of(context).pushReplacementNamed(Home.routeName);
+    } on HttpException catch (error) {
+      var errorMessage = 'Authentication failed';
+      if (error.toString().contains('username exists')) {
+        errorMessage = 'This username is already in use.';
+      } else if (error.toString().contains('INVALID_EMAIL')) {
+        errorMessage = 'This is not a valid email address';
+      } else if (error
+          .toString()
+          .contains('password should be 8 digits or more')) {
+        errorMessage =
+            'This password is too weak, password should be 8 digits or more.';
+      } else if (error.toString().contains('User not found')) {
+        errorMessage = 'Could not find a user with that username.';
+      } else if (error.toString().contains('Password is incorrect')) {
+        errorMessage = 'Invalid password.';
+      }
+      _showErrorDialog(errorMessage);
     } catch (e) {
-      throw e;
+      _showErrorDialog(e);
     }
 
     // final userHeader = {"Content-type": "application/json"};
@@ -106,5 +124,23 @@ class _LoginState extends State<Login> {
     // } catch (e) {
     //   print(e);
     // }
+  }
+
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('An Error Occurred!'),
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Okay'),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+          )
+        ],
+      ),
+    );
   }
 }
