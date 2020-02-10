@@ -1,11 +1,13 @@
 import 'package:community/pages/auth.dart';
 import 'package:community/pages/homePage.dart';
+import 'package:community/pages/profile.dart';
 import 'package:community/pages/signup_page.dart';
 import 'package:community/pages/splash_screen.dart';
 import 'package:community/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './pages/login_page.dart';
+//
 
 void main() {
   runApp(MyApp());
@@ -31,7 +33,8 @@ class MyApp extends StatelessWidget {
             routes: {
               Home.routeName: (context) => Home(),
               Login.routeName: (context) => Login(),
-              SignUp.routeName: (context) => SignUp()
+              SignUp.routeName: (context) => SignUp(),
+              Profile.routeName: (context) => Profile()
             },
           ),
         ));
