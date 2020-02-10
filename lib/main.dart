@@ -1,7 +1,7 @@
 import 'package:community/pages/auth.dart';
 import 'package:community/pages/homePage.dart';
 import 'package:community/pages/posts/postCard.dart';
-import 'file:///C:/rbk/community/flutter/lib/pages/posts/posts.dart';
+
 import 'package:community/pages/signup_page.dart';
 import 'package:community/pages/splash_screen.dart';
 import 'package:community/provider/user_provider.dart';
@@ -37,7 +37,8 @@ class MyApp extends StatelessWidget {
             routes: {
               Home.routeName: (context) => Home(),
               Login.routeName: (context) => Login(),
-              SignUp.routeName: (context) => SignUp()
+              SignUp.routeName: (context) => SignUp(),
+
             },
           ),
         ));
