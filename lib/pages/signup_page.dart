@@ -1,3 +1,4 @@
+import 'package:community/models/http_exception.dart';
 import 'package:community/pages/login_page.dart';
 import 'package:community/pages/homePage.dart';
 import 'package:flutter/material.dart';
@@ -47,6 +48,24 @@ class _SignUpState extends State<SignUp> {
     return 'Email is not valid';
   }
 
+  void _showErrorDialog(String message) {
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text('An Error Occurred!'),
+        content: Text(message),
+        actions: <Widget>[
+          FlatButton(
+            child: Text('Okay'),
+            onPressed: () {
+              Navigator.of(ctx).pop();
+            },
+          )
+        ],
+      ),
+    );
+  }
+
   void saveForm() async {
     if (!_formKey.currentState.validate()) {
       // Invalid!
@@ -62,6 +81,23 @@ class _SignUpState extends State<SignUp> {
           _authData['email'],
           _authData['password']);
       Navigator.of(context).pushReplacementNamed(Home.routeName);
+    } on HttpException catch (error) {
+      var errorMessage = 'Authentication failed';
+      if (error.toString().contains('username exists')) {
+        errorMessage = 'This username is already in use.';
+      } else if (error.toString().contains('INVALID_EMAIL')) {
+        errorMessage = 'This is not a valid email address';
+      } else if (error
+          .toString()
+          .contains('password should be 8 digits or more')) {
+        errorMessage =
+            'This password is too weak, password should be 8 digits or more.';
+      } else if (error.toString().contains('User not found')) {
+        errorMessage = 'Could not find a user with that username.';
+      } else if (error.toString().contains('Password is incorrect')) {
+        errorMessage = 'Invalid password.';
+      }
+      _showErrorDialog(errorMessage);
     } catch (e) {
       throw e;
     }

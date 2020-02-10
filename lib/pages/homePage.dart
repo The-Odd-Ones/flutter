@@ -1,6 +1,8 @@
 import 'package:community/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:convert';
 
 class Home extends StatefulWidget {
   static const routeName = '/home';
@@ -33,7 +35,22 @@ class _HomeState extends State<Home> {
             ),
           ],
         )),
-        body: Text("Home"),
+        body: Column(
+          children: <Widget>[
+            Text("data"),
+            RaisedButton(
+                child: Text('data'),
+                onPressed: () async {
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  final key = 'userDate';
+                  final extractedUserData = prefs.getString(key);
+                  // json.decode(prefs.getString('userData'))
+                  //     as Map<String, dynamic>;
+                  print(extractedUserData);
+                })
+          ],
+        ),
       ),
     );
   }
