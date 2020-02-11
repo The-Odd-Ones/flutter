@@ -26,4 +26,14 @@ class SinglPost with ChangeNotifier {
     isLiked = newValue;
     notifyListeners();
   }
+
+  Future<void> toggleisLiked(String token, String userId) async {
+    final oldStatus = isLiked;
+    isLiked = !isLiked;
+    notifyListeners();
+    final url = '192.168.137.200:8080';
+    const userHeader = {
+      "Content-type": "application/json",
+    };
+  }
 }
