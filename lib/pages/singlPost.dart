@@ -7,6 +7,24 @@ class SinglePost extends StatefulWidget {
 }
 
 class _SinglePostState extends State<SinglePost> {
+  //this function show all comments
+   Widget showComment(){
+      return Card(
+        color: Colors.white,
+        margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+        child: Column(
+          children: <Widget>[
+
+            Container(
+                child: Image(image: NetworkImage('https://r-cf.bstatic.com/images/hotel/max1024x768/208/208351646.jpg'),)
+            ),
+            Container(
+
+            ),
+          ],
+        ),
+      );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,7 +94,10 @@ class _SinglePostState extends State<SinglePost> {
 
                                         ),
                                         onTap: (){
-                                          print('onTap called');
+                                          setState(() {
+                                            print('clicked');
+                                            showComment();
+                                          });
                                         },
                                       ),
                                       GestureDetector(

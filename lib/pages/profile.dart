@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import '../models/classPost.dart';
 import '../widget/followingWidget.dart';
 import '../widget/followersWidget.dart';
+import './editProfil.dart';
 import '../provider/user_provider.dart';
-
+//import './editProfile.dar';
 class Profile extends StatefulWidget {
   static const routeName = '/profile';
 
@@ -204,6 +205,13 @@ class _ProfileState extends State<Profile> {
     return Scaffold(
       // backgroundColor: Colors.grey[100],
       appBar: AppBar(
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.account_box),
+            onPressed: () {
+            Navigator.of(context).pushNamed(EditProfil.routeName);}
+          ),
+        ],
         title: Text('Profile Page'),
         backgroundColor: Colors.redAccent,
       ),

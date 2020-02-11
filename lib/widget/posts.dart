@@ -1,4 +1,4 @@
-import 'package:community/pages/posts/postCard.dart';
+import 'file:///C:/rbk/community/flutter/lib/widget/postCard.dart';
 import 'package:flutter/material.dart';
 class Posts extends StatefulWidget {
   @override
