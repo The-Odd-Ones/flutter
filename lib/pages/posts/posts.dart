@@ -1,6 +1,9 @@
 import 'package:community/pages/posts/postCard.dart';
 import 'package:flutter/material.dart';
+
 class Posts extends StatefulWidget {
+  static const routeName = '/posts';
+
   @override
   _PostsState createState() => _PostsState();
 }

@@ -1,3 +1,5 @@
+import 'package:community/pages/events.dart';
+import 'package:community/pages/posts/posts.dart';
 import 'package:community/pages/profile.dart';
 import 'package:community/provider/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +29,23 @@ class _HomeState extends State<Home> {
                 ),
                 onPressed: () {
                   Navigator.of(context).pushNamed(Profile.routeName);
-                })
+                }),
+            // IconButton(
+            //     icon: Icon(
+            //       Icons.local_post_office,
+            //       color: Colors.white,
+            //     ),
+            //     onPressed: () {
+            //       Navigator.of(context).pushNamed(Posts.routeName);
+            //     }),
+            IconButton(
+                icon: Icon(
+                  Icons.event,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(Events.routeName);
+                }),
           ],
         ),
         drawer: Drawer(
@@ -60,18 +78,19 @@ class _HomeState extends State<Home> {
         )),
         body: Column(
           children: <Widget>[
-            Text("data"),
-            RaisedButton(
-                child: Text('data'),
-                onPressed: () async {
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  final key = 'userDate';
-                  final extractedUserData = prefs.getString(key);
-                  // json.decode(prefs.getString('userData'))
-                  //     as Map<String, dynamic>;
-                  print(extractedUserData);
-                })
+            // Text("data"),
+            // RaisedButton(
+            //   child: Text('data'),
+            //   onPressed: () async {
+            //     SharedPreferences prefs = await SharedPreferences.getInstance();
+            //     final key = 'userDate';
+            //     final extractedUserData = prefs.getString(key);
+            //     // json.decode(prefs.getString('userData'))
+            //     //     as Map<String, dynamic>;
+            //     print(extractedUserData);
+            //   },
+            // ),
+            Posts(),
           ],
         ),
       ),

@@ -1,6 +1,7 @@
-
 import 'package:community/pages/auth.dart';
+import 'package:community/pages/events.dart';
 import 'package:community/pages/homePage.dart';
+import 'package:community/pages/posts/posts.dart';
 import 'package:community/pages/profile.dart';
 import 'package:community/pages/signup_page.dart';
 import 'package:community/pages/splash_screen.dart';
@@ -35,7 +36,9 @@ class MyApp extends StatelessWidget {
               Home.routeName: (context) => Home(),
               Login.routeName: (context) => Login(),
               SignUp.routeName: (context) => SignUp(),
-              Profile.routeName: (context) => Profile()
+              Profile.routeName: (context) => Profile(),
+              Posts.routeName: (context) => Posts(),
+              Events.routeName: (context) => Events()
             },
           ),
         ));
