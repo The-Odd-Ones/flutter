@@ -1,4 +1,6 @@
 import 'package:community/pages/profile.dart';
+import 'package:community/provider/communityProvider.dart';
+import 'package:community/provider/postsprovider.dart';
 import 'package:community/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +15,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    // Provider.of<Products>(context).fetchAndSetProducts(); // WON'T WORK!
+    // Future.delayed(Duration.zero).then((_) {
+    //   Provider.of<Products>(context).fetchAndSetProducts();
+    // });
+
+    Provider.of<CommunityProvider>(context, listen: false).getCommuinties();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -64,13 +77,12 @@ class _HomeState extends State<Home> {
             RaisedButton(
                 child: Text('data'),
                 onPressed: () async {
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  final key = 'userDate';
-                  final extractedUserData = prefs.getString(key);
-                  // json.decode(prefs.getString('userData'))
-                  //     as Map<String, dynamic>;
-                  print(extractedUserData);
+                  final result =
+                      Provider.of<CommunityProvider>(context, listen: false)
+                          .commuinities[1];
+                  print(result);
+                  await Provider.of<PostsProvider>(context, listen: false)
+                      .getPosts(result);
                 })
           ],
         ),
