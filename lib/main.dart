@@ -1,15 +1,18 @@
+import 'package:community/models/posts_model.dart';
 import 'package:community/pages/auth.dart';
 import 'package:community/pages/homePage.dart';
-import 'package:community/pages/posts/postCard.dart';
-
+import 'package:community/pages/profile.dart';
 import 'package:community/pages/signup_page.dart';
+import 'package:community/pages/singlPost.dart';
 import 'package:community/pages/splash_screen.dart';
 import 'package:community/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './pages/login_page.dart';
-import 'pages/homePage.dart';
-import 'package:community/pages/community.dart';
+import 'package:community/pages/singlPost.dart';
+//
+
+
 void main() {
   runApp(MyApp());
 }
@@ -17,34 +20,31 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return SinglePost();
+  }
+}
+
+/*
+ MultiProvider(
         providers: [ChangeNotifierProvider.value(value: UserProvider())],
         child: Consumer<UserProvider>(
           builder: (context, userProvider, _) => MaterialApp(
             home: userProvider.isAuth
                 ? Home()
                 : FutureBuilder(
-
-
-                    future: userProvider.tryAutoLogin(),
-                    builder: (context, authResultSnapshot) =>
-                        authResultSnapshot.connectionState ==
-                                ConnectionState.waiting
-                            ? SplashScreen()
-                            : Auth(),
-                  ),
-
+              future: userProvider.tryAutoLogin(),
+              builder: (context, authResultSnapshot) =>
+              authResultSnapshot.connectionState ==
+                  ConnectionState.waiting
+                  ? SplashScreen()
+                  : Auth(),
+            ),
             routes: {
               Home.routeName: (context) => Home(),
               Login.routeName: (context) => Login(),
               SignUp.routeName: (context) => SignUp(),
-
+              Profile.routeName: (context) => Profile()
             },
           ),
         ));
-  }
-}
-
-/*
-
-*/
+ */
