@@ -104,23 +104,16 @@ class _PostCardState extends State<PostCard> {
 
   @override
   Widget build(BuildContext context) {
-    return
-        //  PageView(
-        //   children: <Widget>[
-        //     Column(
-        //       children: posts.map((post) => buildPosts(post)).toList(),
-        //     ),
-        //   ],
-        // );
-        SingleChildScrollView(
-      child: Column(
-        children: <Widget>[
-          Column(
-            children: posts.map((post) => buildPosts(post)).toList(),
-          ),
-        ],
-      ),
-    );
+    return ListView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: posts.length,
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            child: Column(
+              children: posts.map((post) => buildPosts(post)).toList(),
+            ),
+          );
+        });
   }
 }
 

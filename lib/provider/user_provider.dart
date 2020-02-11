@@ -27,9 +27,16 @@ class UserProvider with ChangeNotifier {
     return null;
   }
 
+  String get userId {
+    if (_userId != null) {
+      return _userId;
+    }
+    return null;
+  }
+
   Future<void> signup(String username, String firstname, String lastname,
       String email, String password) async {
-    const url = '192.168.3.190:8080';
+    const url = '192.168.137.200:8080';
     const userHeader = {"Content-type": "application/json"};
     Map bodyUser = {
       'username': username,
@@ -69,11 +76,10 @@ class UserProvider with ChangeNotifier {
 
     try {
       final result = await http.post(
-          new Uri.http("192.168.3.190:8080", "api/users/authenticate"),
+          new Uri.http("192.168.137.200:8080", "api/users/authenticate"),
           body: json.encode(bodyUser),
           headers: userHeader);
 
-      print('bbbbb $bodyUser');
       final resultData = json.decode(result.body);
 
       if (resultData['success'] == true) {
