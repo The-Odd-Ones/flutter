@@ -4,6 +4,7 @@ import '../widget/followingWidget.dart';
 import '../widget/followersWidget.dart';
 import './editProfil.dart';
 import '../provider/user_provider.dart';
+
 //import './editProfile.dar';
 class Profile extends StatefulWidget {
   static const routeName = '/profile';
@@ -37,7 +38,8 @@ class _ProfileState extends State<Profile> {
       height: screenSize.height / 4.5,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/ninja.jpg'),
+          image: NetworkImage(
+              'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'),
           fit: BoxFit.cover,
         ),
       ),
@@ -52,7 +54,8 @@ class _ProfileState extends State<Profile> {
         height: 140,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/profile.png"),
+            image: NetworkImage(
+                "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(80),
@@ -207,10 +210,10 @@ class _ProfileState extends State<Profile> {
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.account_box),
-            onPressed: () {
-            Navigator.of(context).pushNamed(EditProfil.routeName);}
-          ),
+              icon: Icon(Icons.account_box),
+              onPressed: () {
+                Navigator.of(context).pushNamed(EditProfil.routeName);
+              }),
         ],
         title: Text('Profile Page'),
         backgroundColor: Colors.redAccent,
