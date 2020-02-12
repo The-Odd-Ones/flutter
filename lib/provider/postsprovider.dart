@@ -30,7 +30,6 @@ class PostsProvider with ChangeNotifier {
 
     try {
       final param = {'community': '$comuinity'};
-      print(token);
       final result = await http.get((new Uri.http(url, '/api/posts', param)),
           headers: userHeader);
 
