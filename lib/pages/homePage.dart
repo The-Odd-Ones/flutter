@@ -11,12 +11,13 @@ import 'dart:convert';
 
 class Home extends StatefulWidget {
   static const routeName = '/home';
-
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  List<String> coomuin;
+  // final community;
   @override
   void initState() {
     // Provider.of<Products>(context).fetchAndSetProducts(); // WON'T WORK!
@@ -24,6 +25,11 @@ class _HomeState extends State<Home> {
     //   Provider.of<Products>(context).fetchAndSetProducts();
     // });
 
+    // setState(() {
+    //   coomuin =
+    //       Provider.of<CommunityProvider>(context, listen: false).commuinities;
+    //   print(coomuin);
+    // });
     Provider.of<CommunityProvider>(context, listen: false).getCommuinties();
     super.initState();
   }
@@ -69,7 +75,7 @@ class _HomeState extends State<Home> {
                 child: Column(
                   children: <Widget>[
                     ListTile(
-                      title: Text('community'),
+                      title: Text('community $coomuin'),
                     ),
                     ListTile(
                       leading: Icon(Icons.exit_to_app),

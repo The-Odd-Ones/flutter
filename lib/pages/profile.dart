@@ -3,6 +3,7 @@ import '../models/classPost.dart';
 import '../widget/followingWidget.dart';
 import '../widget/followersWidget.dart';
 import '../provider/user_provider.dart';
+import '../pages/posts/posts.dart';
 
 class Profile extends StatefulWidget {
   static const routeName = '/profile';
@@ -225,6 +226,11 @@ class _ProfileState extends State<Profile> {
               ],
             ),
             Column(
+              // children: <Widget>[
+              //   Expanded(
+              //     child: Posts(),
+              //   ),
+              // ],
               children: posts.map((post) => postTemplate(post)).toList(),
             ),
           ],
