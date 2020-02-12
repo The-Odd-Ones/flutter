@@ -112,7 +112,8 @@ class _LoginState extends State<Login> {
       }
       _showErrorDialog(errorMessage);
     } catch (e) {
-      _showErrorDialog(e);
+      // _showErrorDialog(e);*
+      print(e);
     }
 
     // final userHeader = {"Content-type": "application/json"};
