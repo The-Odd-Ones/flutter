@@ -1,9 +1,9 @@
-
 import 'package:community/models/posts_model.dart';
 
-
 import 'package:community/pages/auth.dart';
+import 'package:community/pages/events.dart';
 import 'package:community/pages/homePage.dart';
+import 'package:community/widget/posts.dart';
 import 'package:community/pages/profile.dart';
 import 'package:community/pages/signup_page.dart';
 import 'package:community/pages/singlPost.dart';
@@ -18,7 +18,6 @@ import 'package:community/pages/editProfil.dart';
 import 'package:community/pages/singlPost.dart';
 import 'package:community/pages/editProfil.dart';
 //
-
 
 void main() {
   runApp(MyApp());
@@ -38,18 +37,19 @@ class MyApp extends StatelessWidget {
             home: userProvider.isAuth
                 ? Home()
                 : FutureBuilder(
-              future: userProvider.tryAutoLogin(),
-              builder: (context, authResultSnapshot) =>
-              authResultSnapshot.connectionState ==
-                  ConnectionState.waiting
-                  ? SplashScreen()
-                  : Auth(),
-            ),
+                    future: userProvider.tryAutoLogin(),
+                    builder: (context, authResultSnapshot) =>
+                        authResultSnapshot.connectionState ==
+                                ConnectionState.waiting
+                            ? SplashScreen()
+                            : Auth(),
+                  ),
             routes: {
               Home.routeName: (context) => Home(),
               Login.routeName: (context) => Login(),
               SignUp.routeName: (context) => SignUp(),
               Profile.routeName: (context) => Profile(),
+              Events.routeName: (context) => Events(),
               EditProfil.routeName: (context) => EditProfil()
             },
           ),

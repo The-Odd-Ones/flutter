@@ -36,6 +36,7 @@ class _EventPState extends State<EventP> {
 //cover Image
   Widget _buildCoverImage(Size screenSize) {
     return Container(
+      // child: MapPage(),
       height: screenSize.height / 4,
       decoration: BoxDecoration(
         image: DecorationImage(

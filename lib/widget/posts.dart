@@ -1,6 +1,9 @@
-import 'file:///C:/rbk/community/flutter/lib/widget/postCard.dart';
+import '../pages/posts/postCard.dart';
 import 'package:flutter/material.dart';
+
 class Posts extends StatefulWidget {
+  static const routeName = '/posts';
+
   @override
   _PostsState createState() => _PostsState();
 }
