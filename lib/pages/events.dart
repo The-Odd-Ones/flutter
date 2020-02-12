@@ -3,6 +3,7 @@ import '../models/classEvent.dart';
 import '../widget/eventWidget.dart';
 
 class Events extends StatefulWidget {
+  static const routeName = '/events';
   @override
   _EventsState createState() => _EventsState();
 }
