@@ -39,7 +39,8 @@ class _ProfileState extends State<Profile> {
       height: screenSize.height / 4.5,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage('assets/ninja.jpg'),
+          image: NetworkImage(
+              'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80'),
           fit: BoxFit.cover,
         ),
       ),
@@ -54,7 +55,8 @@ class _ProfileState extends State<Profile> {
         height: 140,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/profile.png"),
+            image: NetworkImage(
+                "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80"),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(80),
