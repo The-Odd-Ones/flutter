@@ -1,9 +1,10 @@
 import 'package:community/pages/events.dart';
-import 'package:community/pages/posts/posts.dart';
 import 'package:community/pages/profile.dart';
+import 'package:community/widget/posts.dart';
 import 'package:community/provider/communityProvider.dart';
 import 'package:community/provider/postsprovider.dart';
 import 'package:community/provider/user_provider.dart';
+import 'package:community/widget/app_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,13 +25,12 @@ class _HomeState extends State<Home> {
     // Future.delayed(Duration.zero).then((_) {
     //   Provider.of<Products>(context).fetchAndSetProducts();
     // });
-
-    // setState(() {
+    Provider.of<CommunityProvider>(context, listen: false).getCommuinties();
+// setState(() {
     //   coomuin =
     //       Provider.of<CommunityProvider>(context, listen: false).commuinities;
     //   print(coomuin);
     // });
-    Provider.of<CommunityProvider>(context, listen: false).getCommuinties();
     super.initState();
   }
 
@@ -67,54 +67,25 @@ class _HomeState extends State<Home> {
                 }),
           ],
         ),
-        drawer: Drawer(
-            child: Column(
+        drawer: AppDrawer(),
+        body: Column(
           children: <Widget>[
-            SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    ListTile(
-                      title: Text('community $coomuin'),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.exit_to_app),
-                      title: Text('Logout'),
-                      onTap: () {
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pushReplacementNamed('/');
-                        // Navigator.of(context)
-                        //     .pushReplacementNamed(UserProductsScreen.routeName);
-                        Provider.of<UserProvider>(context, listen: false)
-                            .logout();
-                      },
-                    ),
-                  ],
-                ),
-              ),
+            Text("data"),
+            RaisedButton(
+              child: Text('data'),
+              onPressed: () async {
+                final result =
+                    Provider.of<CommunityProvider>(context, listen: false)
+                        .commuinities[1];
+                print(result);
+                await Provider.of<PostsProvider>(context, listen: false)
+                    .getPosts(result);
+              },
+            ),
+            Expanded(
+              child: Posts(),
             ),
           ],
-        )),
-        body: Container(
-          child: Column(
-            children: <Widget>[
-              Text("data"),
-              RaisedButton(
-                child: Text('data'),
-                onPressed: () async {
-                  final result =
-                      Provider.of<CommunityProvider>(context, listen: false)
-                          .commuinities[1];
-                  print(result);
-                  await Provider.of<PostsProvider>(context, listen: false)
-                      .getPosts(result);
-                },
-              ),
-              Expanded(
-                child: Posts(),
-              ),
-            ],
-          ),
         ),
       ),
     );

@@ -1,9 +1,12 @@
+import 'package:community/models/posts_model.dart';
+
 import 'package:community/pages/auth.dart';
 import 'package:community/pages/events.dart';
 import 'package:community/pages/homePage.dart';
-import 'package:community/pages/posts/posts.dart';
+import 'package:community/widget/posts.dart';
 import 'package:community/pages/profile.dart';
 import 'package:community/pages/signup_page.dart';
+import 'package:community/pages/singlPost.dart';
 import 'package:community/pages/splash_screen.dart';
 import 'package:community/provider/communityProvider.dart';
 import 'package:community/provider/postsprovider.dart';
@@ -11,6 +14,9 @@ import 'package:community/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import './pages/login_page.dart';
+import 'package:community/pages/editProfil.dart';
+import 'package:community/pages/singlPost.dart';
+import 'package:community/pages/editProfil.dart';
 //
 
 void main() {
@@ -43,8 +49,8 @@ class MyApp extends StatelessWidget {
               Login.routeName: (context) => Login(),
               SignUp.routeName: (context) => SignUp(),
               Profile.routeName: (context) => Profile(),
-              Posts.routeName: (context) => Posts(),
-              Events.routeName: (context) => Events()
+              Events.routeName: (context) => Events(),
+              EditProfil.routeName: (context) => EditProfil()
             },
           ),
         ));
