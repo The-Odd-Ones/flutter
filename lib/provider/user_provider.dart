@@ -27,6 +27,13 @@ class UserProvider with ChangeNotifier {
     return null;
   }
 
+  String get userId {
+    if (_userId != null) {
+      return _userId;
+    }
+    return null;
+  }
+
   Future<void> signup(String username, String firstname, String lastname,
       String email, String password) async {
     const url = '192.168.3.207:8080';
