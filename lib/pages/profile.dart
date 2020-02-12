@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import '../models/classPost.dart';
-import '../widget/followingWidget.dart';
-import '../widget/followersWidget.dart';
 import './editProfil.dart';
+import '../provider/postsprovider.dart';
 import '../provider/user_provider.dart';
+import '../widget/followersWidget.dart';
+import '../widget/followingWidget.dart';
 import '../widget/posts.dart';
+
 
 //import './editProfile.dar';
 class Profile extends StatefulWidget {
@@ -91,7 +93,6 @@ class _ProfileState extends State<Profile> {
       fontSize: 16,
     );
     return Container(
-      // color: Theme.of(context).scaffoldBackgroundColor,
       padding: EdgeInsets.all(8),
       child: Text(
         bio,
@@ -207,7 +208,6 @@ class _ProfileState extends State<Profile> {
     Size screenSize = MediaQuery.of(context).size;
 
     return Scaffold(
-      // backgroundColor: Colors.grey[100],
       appBar: AppBar(
         actions: <Widget>[
           IconButton(
@@ -237,11 +237,6 @@ class _ProfileState extends State<Profile> {
               ],
             ),
             Column(
-              // children: <Widget>[
-              //   Expanded(
-              //     child: Posts(),
-              //   ),
-              // ],
               children: posts.map((post) => postTemplate(post)).toList(),
             ),
           ],
@@ -250,69 +245,3 @@ class _ProfileState extends State<Profile> {
     );
   }
 }
-
-//SafeArea(
-//   child: SingleChildScrollView(
-//     child: Column(
-//       children: <Widget>[
-//         _buildCoverImage(screenSize),
-
-//         // ClipPath(
-//         //   child: Container(
-//         //     // child: Image.network(
-//         //     //   "https://cdn.pixabay.com/photo/2019/09/29/21/00/background-4514414_960_720.jpg",
-//         //     // ),
-//         //     color: Colors.grey,
-//         //     width: 400.0,
-//         //     height: 200.0,
-//         //   ),
-//         // ),
-//         Center(
-//           child: CircleAvatar(
-//             radius: 60,
-//             backgroundImage: AssetImage('assets/ninja.jpg'),
-//           ),
-//         ),
-//         // left: (MediaQuery.of(context).size.width/2) - radius,
-//         // top: topWidgetHeight - avatarRadius,
-//         Text(
-//           '$fullName',
-//           style: TextStyle(
-//             fontSize: 25,
-//           ),
-//         ),
-//         Container(
-//           child: Text('$bio'),
-//         ),
-//         SizedBox(
-//           height: 30,
-//           width: 350,
-//           child: Divider(
-//             color: Colors.teal,
-//           ),
-//         ),
-//         Container(
-//           margin: EdgeInsets.fromLTRB(10, 10, 10, 10),
-//           child: Row(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: <Widget>[
-//               Container(
-//                 child: Text('_Followers ($_followers)'),
-//                 padding: EdgeInsets.all(30),
-//                 color: Colors.cyan,
-//               ),
-//               Container(
-//                 child: Text('Following ($following)'),
-//                 padding: EdgeInsets.all(30),
-//                 color: Colors.pinkAccent,
-//               ),
-//             ],
-//           ),
-//         ),
-//         Column(
-//           children: posts.map((post) => postTemplate(post)).toList(),
-//         ),
-//       ],
-//     ),
-//   ),
-// ),
