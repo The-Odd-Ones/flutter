@@ -1,5 +1,8 @@
 import 'package:community/pages/profile.dart';
+import 'package:community/provider/communityProvider.dart';
+import 'package:community/provider/postsprovider.dart';
 import 'package:community/provider/user_provider.dart';
+import 'package:community/widget/app_drawer.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -13,6 +16,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    // Provider.of<Products>(context).fetchAndSetProducts(); // WON'T WORK!
+    // Future.delayed(Duration.zero).then((_) {
+    //   Provider.of<Products>(context).fetchAndSetProducts();
+    // });
+    Provider.of<CommunityProvider>(context, listen: false).getCommuinties();
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -30,47 +44,19 @@ class _HomeState extends State<Home> {
                 })
           ],
         ),
-        drawer: Drawer(
-            child: Column(
-          children: <Widget>[
-            SafeArea(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: <Widget>[
-                    ListTile(
-                      title: Text('community'),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.exit_to_app),
-                      title: Text('Logout'),
-                      onTap: () {
-                        Navigator.of(context).pop();
-                        Navigator.of(context).pushReplacementNamed('/');
-                        // Navigator.of(context)
-                        //     .pushReplacementNamed(UserProductsScreen.routeName);
-                        Provider.of<UserProvider>(context, listen: false)
-                            .logout();
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        )),
+        drawer: AppDrawer(),
         body: Column(
           children: <Widget>[
             Text("data"),
             RaisedButton(
                 child: Text('data'),
                 onPressed: () async {
-                  SharedPreferences prefs =
-                      await SharedPreferences.getInstance();
-                  final key = 'userDate';
-                  final extractedUserData = prefs.getString(key);
-                  // json.decode(prefs.getString('userData'))
-                  //     as Map<String, dynamic>;
-                  print(extractedUserData);
+                  final result =
+                      Provider.of<CommunityProvider>(context, listen: false)
+                          .commuinities[1];
+                  print(result);
+                  await Provider.of<PostsProvider>(context, listen: false)
+                      .getPosts(result);
                 })
           ],
         ),
