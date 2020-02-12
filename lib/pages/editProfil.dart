@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:image_picker/image_picker.dart';
 
 class EditProfil extends StatefulWidget {
+
   static const routeName = '/EditProfil';
   @override
   _EditProfilState createState() => _EditProfilState();
@@ -66,6 +67,7 @@ class _ImageCaptureState extends State<ImageCapture> {
             IconButton(
               icon: Icon(Icons.photo_camera),
               onPressed: () => _pickImage(ImageSource.gallery),
+
             ),
             Container(
               decoration: BoxDecoration(
@@ -165,7 +167,3 @@ class _ImageCaptureState extends State<ImageCapture> {
     );
   }
 }
-
-/*
-
- */
