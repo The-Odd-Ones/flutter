@@ -12,29 +12,29 @@ class EventP extends StatefulWidget {
 }
 
 class _EventPState extends State<EventP> {
-  List<Event> event = [
-    Event(
-      image:
-          'https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg',
-      user: 'event title',
-      title: 'Be yourself; everyone else is already taken',
-      description:
-          'description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    ),
-  ];
+  // List<Event> event = [
+  //   Event(
+  //     image:
+  //         'https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg',
+  //     user: 'event title',
+  //     title: 'Be yourself; everyone else is already taken',
+  //     description:
+  //         'description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  //   ),
+  // ];
 
-  List<Post> posts = [
-    Post(
-        user: 'Osca Wilde',
-        text: 'Be yourself; everyone else is already taken'),
-    Post(user: 'Osca Wil', text: 'I have nothing to declare except my genius'),
-    Post(user: 'Osca WIlde', text: 'The truth is rarely pure and never simple'),
-    Post(
-        user: 'Osca Wilde',
-        text: 'Be yourself; everyone else is already taken'),
-    Post(user: 'Osca Wil', text: 'I have nothing to declare except my genius'),
-    Post(user: 'Osca WIlde', text: 'The truth is rarely pure and never simple'),
-  ];
+  // List<Post> posts = [
+  //   Post(
+  //       user: 'Osca Wilde',
+  //       text: 'Be yourself; everyone else is already taken'),
+  //   Post(user: 'Osca Wil', text: 'I have nothing to declare except my genius'),
+  //   Post(user: 'Osca WIlde', text: 'The truth is rarely pure and never simple'),
+  //   Post(
+  //       user: 'Osca Wilde',
+  //       text: 'Be yourself; everyone else is already taken'),
+  //   Post(user: 'Osca Wil', text: 'I have nothing to declare except my genius'),
+  //   Post(user: 'Osca WIlde', text: 'The truth is rarely pure and never simple'),
+  // ];
 
 //cover Image
   Widget _buildCoverImage(Size screenSize) {
@@ -58,8 +58,8 @@ class _EventPState extends State<EventP> {
         height: 140,
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: event.image != null
-                ? NetworkImage(event.image)
+            image: event.file != null
+                ? NetworkImage(event.file)
                 : NetworkImage(
                     'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
             fit: BoxFit.cover,
@@ -82,7 +82,7 @@ class _EventPState extends State<EventP> {
       color: Colors.black,
     );
     return Text(
-      event.user,
+      event.title,
       style: _nameTextStyle,
     );
   }
@@ -159,10 +159,12 @@ class _EventPState extends State<EventP> {
   }
 
   Widget build(BuildContext context) {
+    Provider.of<EventsProvider>(context);
+    final eventId = ModalRoute.of(context).settings.arguments as String;
     Size screenSize = MediaQuery.of(context).size;
     final eventData = Provider.of<EventsProvider>(context);
-    final eventList = eventData.events;
-    print(eventList);
+    final event =
+        eventData.events.firstWhere((element) => element.id == eventId);
 
     return Scaffold(
       // backgroundColor: Colors.grey[100],
@@ -177,14 +179,14 @@ class _EventPState extends State<EventP> {
             Stack(
               children: <Widget>[
                 SizedBox(height: screenSize.height / 5),
-                Column(
-                  children: event.map((event) => buildEvent(event)).toList(),
-                ),
+                Column(children: <Widget>[
+                  buildEvent(event),
+                ]),
               ],
             ),
-            Column(
-              children: posts.map((post) => postTemplate(post)).toList(),
-            ),
+            // Column(
+            //   children: posts.map((post) => postTemplate(post)).toList(),
+            // ),
           ],
         ),
       ),
