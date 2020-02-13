@@ -62,10 +62,13 @@ class _SinglePostState extends State<SinglePost> {
                               //if there is file
                               children: <Widget>[
                                 Image(
-                                  image: NetworkImage(
-                                    post.file,
-                                    scale: 3,
-                                  ),
+                                  image: post.file != null
+                                      ? NetworkImage(
+                                          post.file,
+                                          scale: 3,
+                                        )
+                                      : NetworkImage(
+                                          'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
                                 )
                               ],
                             ),

@@ -1,3 +1,4 @@
+import 'package:community/provider/eventsProvider.dart';
 import 'package:community/provider/postsprovider.dart';
 import 'package:community/provider/user_provider.dart';
 import 'package:flutter/material.dart';
@@ -8,11 +9,13 @@ import '../provider/communityProvider.dart';
 class AppDrawer extends StatelessWidget {
   List<String> groups;
   dynamic postsProv;
+  dynamic eventsProv;
   @override
   Widget build(BuildContext context) {
     final commuinty = Provider.of<CommunityProvider>(context);
     groups = commuinty.commuinities;
     postsProv = Provider.of<PostsProvider>(context, listen: false);
+    eventsProv = Provider.of<EventsProvider>(context, listen: false);
 
     return Drawer(
       child: Column(
@@ -51,6 +54,7 @@ class AppDrawer extends StatelessWidget {
       title: Text(element),
       onTap: () async {
         await postsProv.getPosts(element);
+        await eventsProv.getEvents(element);
         final result = postsProv.posts;
         print(result);
       },

@@ -13,8 +13,7 @@ import 'package:community/provider/eventProvider.dart';
 
 class EventsProvider with ChangeNotifier {
   String token;
-  List<SinglEvent> _events= [];
-
+  List<SinglEvent> _events = [];
 
   EventsProvider();
 
@@ -32,7 +31,7 @@ class EventsProvider with ChangeNotifier {
     final key = 'userDate';
     final extractedUserData = json.decode(prefs.getString(key)) as Map;
     final token = extractedUserData['token'];
-    var url = ' 192.168.3.207:8080';
+    var url = '192.168.137.200:8080';
     final userHeader = {
       "Content-type": "application/json",
       "authorization": "$token"
@@ -42,21 +41,19 @@ class EventsProvider with ChangeNotifier {
       final param = {'community': '$comuinity'};
       final result = await http.get((new Uri.http(url, '/api/events', param)),
           headers: userHeader);
-        print(result);
-      final extractedData = json.decode(result.body) as Map<String, dynamic>;
-      if (extractedData.length > 0) {
-        for (var i = 0; i < extractedData['events'].length; i++) {
-          loadedEvents.add(SinglEvent(
-            id: extractedData['events'][i]['_id'],
-            description: extractedData['events'][i]['description'],
-            username: extractedData['events'][i]['user']['username'],
-            userImg: extractedData['posts'][i]['user']['file'],
-            community: extractedData['posts'][i]['community'],
-            file: extractedData['events'][i]['file'],
-            location: extractedData['events'][i]['location'],
-            participant: extractedData['events'][i]['participant'],
 
-          ));
+      final extractedData = json.decode(result.body) as Map<String, dynamic>;
+      print(extractedData['result']);
+      if (extractedData.length > 0) {
+        for (var i = 0; i < extractedData['result'].length; i++) {
+          loadedEvents.add(SinglEvent(
+              id: extractedData['result'][i]['_id'],
+              community: extractedData['result'][i]['community'],
+              file: extractedData['result'][i]['file'],
+              description: extractedData['result'][i]['description'],
+              title: extractedData['result'][i]['title'],
+              location: extractedData['result'][i]['location']['coordinates'],
+              participant: extractedData['result'][i]['enrollsCount']));
         }
         _events = loadedEvents;
         print(_events);
@@ -69,5 +66,3 @@ class EventsProvider with ChangeNotifier {
     }
   }
 }
-
-
