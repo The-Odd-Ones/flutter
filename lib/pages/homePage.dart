@@ -3,6 +3,7 @@ import 'package:community/pages/profile.dart';
 import 'package:community/widget/posts.dart';
 import 'package:community/provider/communityProvider.dart';
 import 'package:community/provider/postsprovider.dart';
+import 'package:community/provider/eventsProvider.dart';
 import 'package:community/provider/user_provider.dart';
 import 'package:community/widget/app_drawer.dart';
 import 'package:provider/provider.dart';
@@ -19,6 +20,9 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<String> coomuin;
   // final community;
+  // test get events
+
+
   @override
   void initState() {
     // Provider.of<Products>(context).fetchAndSetProducts(); // WON'T WORK!
@@ -26,6 +30,9 @@ class _HomeState extends State<Home> {
     //   Provider.of<Products>(context).fetchAndSetProducts();
     // });
     Provider.of<CommunityProvider>(context, listen: false).getCommuinties();
+
+
+
 // setState(() {
     //   coomuin =
     //       Provider.of<CommunityProvider>(context, listen: false).commuinities;
