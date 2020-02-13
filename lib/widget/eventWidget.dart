@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:community/provider/eventsProvider.dart';
 
 class EventP extends StatefulWidget {
+  static const routeName = '/singlEvent';
   @override
   _EventPState createState() => _EventPState();
 }

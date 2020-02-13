@@ -65,7 +65,7 @@ class _PostCardState extends State<PostCard> {
             ),
             Container(
               child: Image(
-                image: NetworkImage != null
+                image: post.file != null
                     ? NetworkImage(post.file)
                     : NetworkImage(
                         'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
@@ -96,6 +96,7 @@ class _PostCardState extends State<PostCard> {
   Widget build(BuildContext context) {
     final postData = Provider.of<PostsProvider>(context);
     final postList = postData.posts;
+    print(postList);
     return ListView.builder(
         padding: const EdgeInsets.all(8),
         itemCount: postList.length,
