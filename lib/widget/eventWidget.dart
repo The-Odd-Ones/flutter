@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/classPost.dart';
 import '../models/classEvent.dart';
 import 'mapWidget.dart';
+import 'package:provider/provider.dart';
+import 'package:community/provider/eventsProvider.dart';
 
 class EventP extends StatefulWidget {
   @override
@@ -157,6 +159,9 @@ class _EventPState extends State<EventP> {
 
   Widget build(BuildContext context) {
     Size screenSize = MediaQuery.of(context).size;
+    final eventData = Provider.of<EventsProvider>(context);
+    final eventList = eventData.events;
+    print(eventList);
 
     return Scaffold(
       // backgroundColor: Colors.grey[100],

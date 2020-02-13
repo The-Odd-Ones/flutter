@@ -38,7 +38,7 @@ class SinglPost with ChangeNotifier {
     final oldStatus = isLiked;
     isLiked = !isLiked;
     notifyListeners();
-    final url = '192.168.137.200:8080';
+    final url = '192.168.3.207:8080';
     const userHeader = {
       "Content-type": "application/json",
     };

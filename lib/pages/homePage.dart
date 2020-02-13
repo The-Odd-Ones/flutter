@@ -2,8 +2,11 @@ import 'package:community/pages/events.dart';
 import 'package:community/pages/posts/postCard.dart';
 import 'package:community/pages/profile.dart';
 import 'package:community/widget/posts.dart';
+import 'package:community/widget/eventWidget.dart';
+
 import 'package:community/provider/communityProvider.dart';
 import 'package:community/provider/postsprovider.dart';
+import 'package:community/provider/eventsProvider.dart';
 import 'package:community/provider/user_provider.dart';
 import 'package:community/widget/app_drawer.dart';
 import 'package:provider/provider.dart';
@@ -26,6 +29,7 @@ class _HomeState extends State<Home> {
   void initState() {
     Provider.of<CommunityProvider>(context, listen: false).getCommuinties();
     Provider.of<PostsProvider>(context, listen: false).getPosts('Main');
+
     super.initState();
   }
 
@@ -67,6 +71,8 @@ class _HomeState extends State<Home> {
                 print(result);
                 await Provider.of<PostsProvider>(context, listen: false)
                     .getPosts(result);
+
+
               },
             ),
             Expanded(

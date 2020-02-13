@@ -1,93 +1,73 @@
-/*
+import 'dart:convert';
+import 'dart:ffi';
+import 'dart:io';
+import 'package:community/provider/post_Provider.dart';
+import 'package:http/http.dart' as http;
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:community/provider/eventProvider.dart';
 
-class EventsProvider extends ChangeNotifier{
+class EventsProvider with ChangeNotifier {
+  String token;
+  List<SinglEvent> _events= [];
 
-  dynamic authToken;
-  String userId;
-  List<String> _events = [];
+
   EventsProvider();
 
-  List<String> get events {
+  List<SinglEvent> get events {
     return [..._events];
   }
 
+  SinglEvent findById(String id) {
+    return _events.firstWhere((element) => element.id == id);
+  }
 
-
-
-  Future <String> getEvents() async {
+  Future<void> getEvents(String comuinity) async {
+    final List<SinglEvent> loadedEvents = [];
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final key = 'userDate';
     final extractedUserData = json.decode(prefs.getString(key)) as Map;
     final token = extractedUserData['token'];
-
-    final url = '192.168.3.207:8080';
+    var url = ' 192.168.3.207:8080';
     final userHeader = {
       "Content-type": "application/json",
       "authorization": "$token"
     };
+
     try {
-      final result = await http.get((new Uri.http(url, "/api/events")),
+      final param = {'community': '$comuinity'};
+      final result = await http.get((new Uri.http(url, '/api/events', param)),
           headers: userHeader);
+        print(result);
       final extractedData = json.decode(result.body) as Map<String, dynamic>;
-      if (extractedData == null) {
-        return;
-      }
-      final List<String> loadedEvents = [];
+      if (extractedData.length > 0) {
+        for (var i = 0; i < extractedData['events'].length; i++) {
+          loadedEvents.add(SinglEvent(
+            id: extractedData['events'][i]['_id'],
+            description: extractedData['events'][i]['description'],
+            username: extractedData['events'][i]['user']['username'],
+            userImg: extractedData['posts'][i]['user']['file'],
+            community: extractedData['posts'][i]['community'],
+            file: extractedData['events'][i]['file'],
+            location: extractedData['events'][i]['location'],
+            participant: extractedData['events'][i]['participant'],
 
-      for (var i = 0; i < extractedData['result'].length; i++) {
-        loadedEvents.add(extractedData['result'][i]['name']);
+          ));
+        }
+        _events = loadedEvents;
+        print(_events);
+      } else {
+        _events = [];
       }
-
-      _events = loadedEvents;
-      print(_events);
+      notifyListeners();
     } catch (e) {
-      throw (e);
+      throw e;
     }
   }
-
 }
-*/
 
-
-
-import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
-
-class NetworkHelper {
-
-  NetworkHelper(this.url);
-
-  final String url ;
-  Future getData()async {
-    http.Response response = await http.get('192.168.3.207:8080/api/events');
-
-    if(response.statusCode ==200) {
-      String data = response.body;
-      return jsonDecode(data);
-    }else
-    { print(response.statusCode);}
-
-  }
-
-}
-/*
-class EventsProvider extends ChangeNotifier{
-
-  dynamic authToken;
-  String userId;
-  List<String> _events = [];
-  EventsProvider();
-
-
-  List<String> getallEvents {
-    return [..._events];
-  }
-
-}
- */
 
