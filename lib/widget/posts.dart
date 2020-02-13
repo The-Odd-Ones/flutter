@@ -1,6 +1,3 @@
-import 'package:community/provider/postsprovider.dart';
-import 'package:provider/provider.dart';
-
 import '../pages/posts/postCard.dart';
 import 'package:flutter/material.dart';
 

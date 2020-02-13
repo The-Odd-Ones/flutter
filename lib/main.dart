@@ -50,7 +50,8 @@ class MyApp extends StatelessWidget {
               SignUp.routeName: (context) => SignUp(),
               Profile.routeName: (context) => Profile(),
               Events.routeName: (context) => Events(),
-              EditProfil.routeName: (context) => EditProfil()
+              EditProfil.routeName: (context) => EditProfil(),
+              SinglePost.routeName: (context) => SinglePost()
             },
           ),
         ));
