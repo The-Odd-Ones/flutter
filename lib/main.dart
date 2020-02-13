@@ -17,7 +17,8 @@ import './pages/login_page.dart';
 import 'package:community/pages/editProfil.dart';
 import 'package:community/pages/singlPost.dart';
 import 'package:community/pages/editProfil.dart';
-//
+import 'package:community/widget/addPost.dart';
+
 
 void main() {
   runApp(MyApp());
@@ -50,7 +51,9 @@ class MyApp extends StatelessWidget {
               SignUp.routeName: (context) => SignUp(),
               Profile.routeName: (context) => Profile(),
               Events.routeName: (context) => Events(),
-              EditProfil.routeName: (context) => EditProfil()
+              EditProfil.routeName: (context) => EditProfil(),
+              AddPost.routeName: (context) => AddPost()
+
             },
           ),
         ));

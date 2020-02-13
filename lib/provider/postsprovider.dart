@@ -40,6 +40,36 @@ class PostsProvider with ChangeNotifier {
       print(e);
     }
   }
+
+  // Future<void> savePost(String post, String image) async {
+  //   const url = '192.168.137.200:8080';
+  //   const postHeader = {"Content-type": "application/json"};
+  //   Map bodyPost = {
+  //     'post': post,
+  //     'image': image
+  //   };
+  //   try {
+  //     final result = await http.post(new Uri.http(url, "api/post"),
+  //         body: json.encode(bodyPost), headers: postHeader);
+
+  //     final resultData = json.decode(result.body);
+  //     if (resultData['success'] == true) {
+  //       _token = resultData['token'];
+  //       final postResult = resultData['post'];
+  //       _postId = postResult['_id'];
+  //       _post = postResult['post'];
+  //       _image = postResult['image'];
+  //       _savepostData(
+  //           _token, _postId, post, image);
+  //     } else {
+  //       throw HttpException(resultData['msg']);
+  //     }
+  //   } catch (e) {
+  //     throw e;
+  //   }
+
+  //   notifyListeners();
+  // }
 }
 
 // "https://192.168.137.200:8080/api/posts?community=Art"
