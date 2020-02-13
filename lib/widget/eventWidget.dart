@@ -14,11 +14,11 @@ class _EventPState extends State<EventP> {
   List<Event> event = [
     Event(
       image:
-          'https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg',
+      'https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg',
       user: 'event title',
       title: 'Be yourself; everyone else is already taken',
       description:
-          'description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+      'description: Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
     ),
   ];
 
@@ -60,7 +60,7 @@ class _EventPState extends State<EventP> {
             image: event.image != null
                 ? NetworkImage(event.image)
                 : NetworkImage(
-                    'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
+                'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(80),

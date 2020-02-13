@@ -38,6 +38,12 @@ class _HomeState extends State<Home> {
     return Center(
       child: Scaffold(
         appBar: AppBar(
+
+            backgroundColor: Colors.lightGreen,
+            elevation: 4.0,
+            centerTitle: true,
+         
+
           title: Text('comunity'),
           actions: <Widget>[
             IconButton(

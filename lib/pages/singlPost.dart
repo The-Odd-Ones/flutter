@@ -33,10 +33,23 @@ class _SinglePostState extends State<SinglePost> {
     final postId = ModalRoute.of(context).settings.arguments as String;
     final postData = Provider.of<PostsProvider>(context);
     final post = postData.posts.firstWhere((element) => element.id == postId);
+
+    int nbcomment = post.commentsCount ;
+    String comm = "$nbcomment";
+    //
+
+
     return MaterialApp(
       home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.greenAccent,
+          elevation: 4.0,
+          centerTitle: true,
+          title: Text('Single Post'),
+        ),
         backgroundColor: Colors.black,
         body: SafeArea(
+
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -44,81 +57,98 @@ class _SinglePostState extends State<SinglePost> {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Card(
-                      child: Column(
-                        children: <Widget>[
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(post.userImg),
-                            radius: 50,
+                    Column(
+                      children: <Widget>[
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(post.userImg),
+                          radius: 50,
+                        ),
+                        Text(
+                          post.username,
+                          style:
+                              TextStyle(fontSize: 25, color: Colors.indigo),
+                        ),
+                        Container(
+                          child: Text(post.content,
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
                           ),
-                          Text(
-                            post.username,
-                            style:
-                                TextStyle(fontSize: 25, color: Colors.indigo),
+                        ),
+                        Container(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            //if there is file
+                            children: <Widget>[
+                              Image(
+                                image: NetworkImage(
+                                  post.file,
+                                  scale: 3,
+                                ),
+                              )
+                            ],
                           ),
-                          Container(
+                        ),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
                             child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              //if there is file
                               children: <Widget>[
-                                Image(
-                                  image: NetworkImage(
-                                    post.file,
-                                    scale: 3,
-                                  ),
-                                )
+                                Row(
+                                  children: <Widget>[
+                                    GestureDetector(
+                                      child: Icon(
+                                        Icons.favorite_border,
+                                        color: Colors.red,
+                                        size: 25,
+                                      ),
+                                      onTap: () {
+                                        print('onTap called');
+                                      },
+                                    ),
+                                    GestureDetector(
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.comment,
+                                            color: Colors.grey,
+                                            size: 25,
+                                          ),
+                                          Text(comm,
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                          ),
+                                          )
+                                        ],
+                                      ),
+                                      onTap: () {
+                                        setState(() {
+                                          print('clicked');
+                                          showComment();
+                                        });
+                                      },
+                                    ),
+                                    GestureDetector(
+                                      child: Icon(
+                                        Icons.share,
+                                        color: Colors.grey,
+                                        size: 25,
+                                      ),
+                                      // onTap will be changed and work correctly with the back ena
+                                      onTap: () {
+                                        print('onTap called');
+                                      },
+                                    )
+                                  ],
+                                ),
                               ],
                             ),
                           ),
-                          Container(
-                            child: Padding(
-                              padding: const EdgeInsets.all(20.0),
-                              child: Column(
-                                children: <Widget>[
-                                  Row(
-                                    children: <Widget>[
-                                      GestureDetector(
-                                        child: Icon(
-                                          Icons.favorite_border,
-                                          color: Colors.red,
-                                          size: 25,
-                                        ),
-                                        onTap: () {
-                                          print('onTap called');
-                                        },
-                                      ),
-                                      GestureDetector(
-                                        child: Icon(
-                                          Icons.comment,
-                                          color: Colors.grey,
-                                          size: 25,
-                                        ),
-                                        onTap: () {
-                                          setState(() {
-                                            print('clicked');
-                                            showComment();
-                                          });
-                                        },
-                                      ),
-                                      GestureDetector(
-                                        child: Icon(
-                                          Icons.share,
-                                          color: Colors.grey,
-                                          size: 25,
-                                        ),
-                                        // onTap will be changed and work correctly with the back ena
-                                        onTap: () {
-                                          print('onTap called');
-                                        },
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
+                    ),
+                    Container(
+
                     ),
                   ],
                 ),

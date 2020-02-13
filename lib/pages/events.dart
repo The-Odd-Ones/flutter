@@ -12,7 +12,7 @@ class _EventsState extends State<Events> {
   List<Event> events = [
     Event(
       image:
-          'https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg',
+      'https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg',
       user: 'event title',
       title: 'Be yourself; everyone else is already taken',
       description: 'Be yourself; everyone else is already taken',
@@ -23,22 +23,22 @@ class _EventsState extends State<Events> {
       user: 'Osca hgjil2',
       title: 'I have nothing to declare except my genius ',
       description:
-          'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ',
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ',
     ),
     Event(
       image:
-          'https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg',
+      'https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg',
       user: 'Os455jca Wi9e',
       title: 'Be yourself; everyone else is already taken',
       description: 'Be yourself; everyone else is already taken',
     ),
     Event(
       image:
-          'https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg',
+      'https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg',
       user: 'Osdgca Wi5lde',
       title: 'Be yourself; everyone else is already taken',
       description:
-          'commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     ),
     Event(
       // image:
@@ -49,11 +49,11 @@ class _EventsState extends State<Events> {
     ),
     Event(
       image:
-          'https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg',
+      'https://image.shutterstock.com/image-photo/beautiful-water-drop-on-dandelion-260nw-789676552.jpg',
       user: 'O89a Wilde',
       title: 'Be yourself; everyone else is already taken',
       description:
-          'commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+      'commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     ),
     Event(
       // image:
@@ -61,7 +61,7 @@ class _EventsState extends State<Events> {
       user: 'Osca W58l2',
       title: 'I have nothing to declare except my genius ',
       description:
-          'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ',
+      'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea ',
     ),
   ];
 
@@ -74,7 +74,7 @@ class _EventsState extends State<Events> {
           image: event.image != null
               ? NetworkImage(event.image)
               : NetworkImage(
-                  'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
+              'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -160,7 +160,7 @@ class _EventsState extends State<Events> {
                 children: <Widget>[
                   Column(
                     children:
-                        events.map((event) => buildEvents(event)).toList(),
+                    events.map((event) => buildEvents(event)).toList(),
                   ),
                 ],
               ),
@@ -171,4 +171,3 @@ class _EventsState extends State<Events> {
     );
   }
 }
-

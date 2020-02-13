@@ -55,6 +55,8 @@ class PostsProvider with ChangeNotifier {
             commentsCount: extractedData['posts'][i]['commentsCount'],
             likesCount: extractedData['posts'][i]['likesCount'],
             sharesCount: extractedData['posts'][i]['sharesCount'],
+
+
           ));
         }
         _posts = loadedPosts;
