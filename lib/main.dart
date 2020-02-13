@@ -3,6 +3,8 @@ import 'package:community/models/posts_model.dart';
 import 'package:community/pages/auth.dart';
 import 'package:community/pages/events.dart';
 import 'package:community/pages/homePage.dart';
+import 'package:community/provider/eventsProvider.dart';
+import 'package:community/widget/eventWidget.dart';
 import 'package:community/widget/posts.dart';
 import 'package:community/pages/profile.dart';
 import 'package:community/pages/signup_page.dart';
@@ -30,7 +32,8 @@ class MyApp extends StatelessWidget {
         providers: [
           ChangeNotifierProvider.value(value: UserProvider()),
           ChangeNotifierProvider.value(value: CommunityProvider()),
-          ChangeNotifierProvider.value(value: PostsProvider())
+          ChangeNotifierProvider.value(value: PostsProvider()),
+          ChangeNotifierProvider.value(value: EventsProvider()),
         ],
         child: Consumer<UserProvider>(
           builder: (context, userProvider, _) => MaterialApp(
@@ -51,7 +54,8 @@ class MyApp extends StatelessWidget {
               Profile.routeName: (context) => Profile(),
               Events.routeName: (context) => Events(),
               EditProfil.routeName: (context) => EditProfil(),
-              SinglePost.routeName: (context) => SinglePost()
+              SinglePost.routeName: (context) => SinglePost(),
+              EventP.routeName: (context) => EventP()
             },
           ),
         ));

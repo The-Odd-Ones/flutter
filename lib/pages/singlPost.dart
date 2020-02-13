@@ -94,32 +94,34 @@ class _SinglePostState extends State<SinglePost> {
                             padding: const EdgeInsets.all(20.0),
                             child: Column(
                               children: <Widget>[
-                                Row(
-                                  children: <Widget>[
-                                    GestureDetector(
-                                      child: Icon(
-                                        Icons.favorite_border,
-                                        color: Colors.red,
-                                        size: 25,
-                                      ),
-                                      onTap: () {
-                                        print('onTap called');
-                                      },
-                                    ),
-                                    GestureDetector(
-                                      child: Row(
-                                        children: <Widget>[
-                                          Icon(
-                                            Icons.comment,
-                                            color: Colors.grey,
-                                            size: 25,
-                                          ),
-                                          Text(comm,
-                                          style: TextStyle(
-                                            color: Colors.white,
-                                          ),
-                                          )
-                                        ],
+                                Image(
+                                  image: post.file != null
+                                      ? NetworkImage(
+                                          post.file,
+                                          scale: 3,
+                                        )
+                                      : NetworkImage(
+                                          'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
+                                )
+                              ],
+                            ),
+                          ),
+                          Container(
+                            child: Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: Column(
+                                children: <Widget>[
+                                  Row(
+                                    children: <Widget>[
+                                      GestureDetector(
+                                        child: Icon(
+                                          Icons.favorite_border,
+                                          color: Colors.red,
+                                          size: 25,
+                                        ),
+                                        onTap: () {
+                                          print('onTap called');
+                                        },
                                       ),
                                       onTap: () {
                                         setState(() {

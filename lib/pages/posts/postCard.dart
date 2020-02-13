@@ -49,11 +49,13 @@ class _PostCardState extends State<PostCard> {
                 fontSize: 20,
               ),
             ),
+<<<<<<< HEAD
             subtitle: Text(
               'marooo',
               style: TextStyle(
                 color: Colors.grey,
                 fontSize: 10,
+
               ),
             ),
           ),
@@ -89,6 +91,7 @@ class _PostCardState extends State<PostCard> {
   Widget build(BuildContext context) {
     final postData = Provider.of<PostsProvider>(context);
     final postList = postData.posts;
+    print(postList);
     return ListView.builder(
         padding: const EdgeInsets.all(8),
         itemCount: postList.length,
