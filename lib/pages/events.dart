@@ -127,7 +127,7 @@ class _EventsState extends State<Events> {
         padding: const EdgeInsets.all(10.0),
         child: GestureDetector(
           onTap: () {
-            navigateToEventP(context);
+            navigateToEventP(context, event);
           },
           child: Column(
             children: <Widget>[
@@ -141,8 +141,8 @@ class _EventsState extends State<Events> {
     );
   }
 
-  Future navigateToEventP(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EventP()));
+  Future navigateToEventP(context, event) async {
+    Navigator.of(context).pushNamed(EventP.routeName, arguments: event.id);
   }
 
   @override
