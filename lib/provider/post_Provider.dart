@@ -5,23 +5,30 @@ import 'package:http/http.dart' as http;
 
 class SinglPost with ChangeNotifier {
   final String id;
-  final String user;
+  final String username;
+  final String userImg;
   final String community;
-  final String event;
   final String content;
   final String file;
-  final String sharedpost;
+  final int commentsCount;
+  final int sharesCount;
+  final int likesCount;
   bool isLiked;
+  bool isShared;
 
   SinglPost(
       {@required this.id,
-      @required this.user,
+      @required this.username,
+      this.userImg,
       @required this.community,
-      this.event,
       @required this.content,
       this.file,
-      this.sharedpost,
-      this.isLiked = false});
+      this.commentsCount,
+      this.likesCount,
+      this.sharesCount,
+      this.isLiked = false,
+      this.isShared = false});
+
   void _isliked(bool newValue) {
     isLiked = newValue;
     notifyListeners();
