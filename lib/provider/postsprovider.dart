@@ -12,12 +12,21 @@ import 'package:http/http.dart' as http;
 
 class PostsProvider with ChangeNotifier {
   String token;
-
+  List<SinglPost> _posts = [];
   // List<SinglPost> _posts;
 
   PostsProvider();
 
+  List<SinglPost> get posts {
+    return [..._posts];
+  }
+
+  SinglPost findById(String id) {
+    return _posts.firstWhere((element) => element.id == id);
+  }
+
   Future<void> getPosts(String comuinity) async {
+    final List<SinglPost> loadedPosts = [];
     SharedPreferences prefs = await SharedPreferences.getInstance();
     final key = 'userDate';
     final extractedUserData = json.decode(prefs.getString(key)) as Map;
@@ -30,14 +39,32 @@ class PostsProvider with ChangeNotifier {
 
     try {
       final param = {'community': '$comuinity'};
-      print(token);
       final result = await http.get((new Uri.http(url, '/api/posts', param)),
           headers: userHeader);
 
-      // final extractedData = json.decode(result.body) as Map<String, dynamic>;
-      print(result.body);
+      final extractedData = json.decode(result.body) as Map<String, dynamic>;
+      if (extractedData.length > 0) {
+        for (var i = 0; i < extractedData['posts'].length; i++) {
+          loadedPosts.add(SinglPost(
+            id: extractedData['posts'][i]['_id'],
+            content: extractedData['posts'][i]['content'],
+            username: extractedData['posts'][i]['user']['username'],
+            userImg: extractedData['posts'][i]['user']['file'],
+            community: extractedData['posts'][i]['community'],
+            file: extractedData['posts'][i]['file'],
+            commentsCount: extractedData['posts'][i]['commentsCount'],
+            likesCount: extractedData['posts'][i]['likesCount'],
+            sharesCount: extractedData['posts'][i]['sharesCount'],
+          ));
+        }
+        _posts = loadedPosts;
+        print(_posts);
+      } else {
+        _posts = [];
+      }
+      notifyListeners();
     } catch (e) {
-      print(e);
+      throw e;
     }
   }
 

@@ -1,3 +1,6 @@
+import 'package:community/provider/postsprovider.dart';
+import 'package:provider/provider.dart';
+
 import '../pages/posts/postCard.dart';
 import 'package:flutter/material.dart';
 
@@ -14,18 +17,3 @@ class _PostsState extends State<Posts> {
     return PostCard();
   }
 }
-
-/*
-child: ListTile(
-                leading:Icon(Icons.phone,
-                  size: 30,
-                  color: Colors.pinkAccent,
-                ),
-                title: Text('24778550',
-                  style: TextStyle(
-                    color: Colors.pinkAccent,
-                    fontSize: 20,
-                  ),),
-
-              ),
- */

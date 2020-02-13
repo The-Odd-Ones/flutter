@@ -107,6 +107,9 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.lightGreen,
+        elevation: 4.0,
+        centerTitle: true,
         title: Text('Sign Up'),
       ),
       body: Center(
@@ -114,8 +117,25 @@ class _SignUpState extends State<SignUp> {
             key: _formKey,
             child: ListView(
               children: <Widget>[
+                Center(
+                  child: Text('Be part of a large community',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.lightGreen,
+                      fontFamily: 'Galada',
+                    ),
+                  ),
+                ),
+
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'UserName'),
+                  decoration: InputDecoration(labelText: 'UserName',
+                      contentPadding: EdgeInsets.all(5),
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(
+
+                        ),)
+                  ),
                   textInputAction: TextInputAction.next,
                   validator: (value) {
                     if (value.isEmpty) {
@@ -128,7 +148,14 @@ class _SignUpState extends State<SignUp> {
                   },
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'first Name'),
+                  decoration: InputDecoration(labelText: 'first Name',
+                      contentPadding: EdgeInsets.all(5),
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(
+
+                        ),)
+                  ),
                   textInputAction: TextInputAction.next,
                   validator: (value) {
                     if (value.isEmpty) {
@@ -141,7 +168,14 @@ class _SignUpState extends State<SignUp> {
                   },
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'last Name'),
+                  decoration: InputDecoration(labelText: 'last Name',
+                      contentPadding: EdgeInsets.all(5),
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(
+
+                        ),)
+                  ),
                   textInputAction: TextInputAction.next,
                   validator: (value) {
                     if (value.isEmpty) {
@@ -154,7 +188,13 @@ class _SignUpState extends State<SignUp> {
                   },
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Email'),
+                  decoration: InputDecoration(labelText: 'Email',
+                      contentPadding: EdgeInsets.all(5),
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(
+
+                        ),)),
                   textInputAction: TextInputAction.next,
                   validator: _validateEmail,
                   onSaved: (val) {
@@ -162,7 +202,14 @@ class _SignUpState extends State<SignUp> {
                   },
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'password'),
+                  decoration: InputDecoration(labelText: 'password',
+                      contentPadding: EdgeInsets.all(5),
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(
+
+                        ),)
+                  ),
                   obscureText: true,
                   textInputAction: TextInputAction.done,
                   validator: (value) {
@@ -176,12 +223,28 @@ class _SignUpState extends State<SignUp> {
                   },
                 ),
                 RaisedButton(
-                    child: Text('Register'),
+                    color: Colors.lightGreen,
+                    shape: StadiumBorder(),
+                    child: Text('Register',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Galada',
+                        color: Colors.white,
+                      ),
+                    ),
                     onPressed: () {
                       saveForm();
                     }),
                 RaisedButton(
-                    child: Text('I have a account'),
+                    color: Colors.lightGreen,
+                    shape: StadiumBorder(),
+                    child: Text('I have a account',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Galada',
+                        color: Colors.white,
+                      ),
+                    ),
                     onPressed: () {
                       Navigator.of(context)
                           .pushReplacementNamed(Login.routeName);

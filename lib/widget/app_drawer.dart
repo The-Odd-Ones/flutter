@@ -1,5 +1,5 @@
+import 'package:community/provider/postsprovider.dart';
 import 'package:community/provider/user_provider.dart';
-import 'package:community/widget/menuElm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,10 +7,13 @@ import '../provider/communityProvider.dart';
 
 class AppDrawer extends StatelessWidget {
   List<String> groups;
+  dynamic postsProv;
   @override
   Widget build(BuildContext context) {
     final commuinty = Provider.of<CommunityProvider>(context);
     groups = commuinty.commuinities;
+    postsProv = Provider.of<PostsProvider>(context, listen: false);
+
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -19,7 +22,7 @@ class AppDrawer extends StatelessWidget {
             automaticallyImplyLeading: false,
           ),
           Column(
-            children: groups.map((e) => menuElement(e)).toList(),
+            children: groups.map((e) => menuElement(context, e)).toList(),
           ),
 
           // ListView.builder(
@@ -43,9 +46,14 @@ class AppDrawer extends StatelessWidget {
     );
   }
 
-  Widget menuElement(element) {
+  Widget menuElement(context, element) {
     return ListTile(
       title: Text(element),
+      onTap: () async {
+        await postsProv.getPosts(element);
+        final result = postsProv.posts;
+        print(result);
+      },
     );
   }
 }

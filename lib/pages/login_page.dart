@@ -27,17 +27,40 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.lightGreen,
+        elevation: 4.0,
+        centerTitle: true,
         title: Text('Login'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Center(
+
           child: Form(
             key: _formKey,
             child: ListView(
               children: <Widget>[
+
+                Center(
+                  child: Text('Welcome to community App',
+                  style: TextStyle(
+                    fontSize: 20,
+                    color: Colors.lightGreen,
+                    fontFamily: 'Galada',
+                  ),
+                  ),
+                ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'User Name'),
+
+                decoration: InputDecoration(labelText: 'User Name',
+
+                    contentPadding: EdgeInsets.all(5),
+                    border: new OutlineInputBorder(
+                    borderRadius: new BorderRadius.circular(25.0),
+                    borderSide: new BorderSide(
+
+                ),)
+                  ),
                   textInputAction: TextInputAction.next,
                   validator: (value) {
                     if (value.isEmpty) {
@@ -50,7 +73,13 @@ class _LoginState extends State<Login> {
                   },
                 ),
                 TextFormField(
-                  decoration: InputDecoration(labelText: 'Password'),
+                  decoration: InputDecoration(labelText: 'Password',
+                        contentPadding: EdgeInsets.all(5),
+                        border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(
+                        ),)
+                  ),
                   textInputAction: TextInputAction.done,
                   obscureText: true,
                   validator: (value) {
@@ -64,13 +93,30 @@ class _LoginState extends State<Login> {
                   },
                 ),
                 RaisedButton(
-                  child: Text('Save'),
+                  color: Colors.lightGreen,
+                  shape: StadiumBorder(),
+                  elevation: 2,
+                  child: Text('Login',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontFamily: 'Galada',
+                      color: Colors.white,
+                    ),
+                  ),
                   onPressed: () {
                     saveForm();
                   },
                 ),
                 RaisedButton(
-                    child: Text('Create Account'),
+                    color: Colors.lightGreen,
+                    shape: StadiumBorder(),
+                    child: Text('Create Account',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Galada',
+                        color: Colors.white,
+                      ),
+                    ),
                     onPressed: () {
                       Navigator.of(context)
                           .pushReplacementNamed(SignUp.routeName);
