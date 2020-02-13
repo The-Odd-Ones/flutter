@@ -142,10 +142,8 @@ class _EventPState extends State<EventP> {
           children: <Widget>[
             RaisedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MapPage()),
-                );
+                Navigator.of(context)
+                    .pushNamed(MapPage.routeName, arguments: event.location);
               },
               child: _buildCoverImage(screenSize),
             ),

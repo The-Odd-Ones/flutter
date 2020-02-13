@@ -5,6 +5,7 @@ import 'package:community/pages/events.dart';
 import 'package:community/pages/homePage.dart';
 import 'package:community/provider/eventsProvider.dart';
 import 'package:community/widget/eventWidget.dart';
+import 'package:community/widget/mapWidget.dart';
 import 'package:community/widget/posts.dart';
 import 'package:community/pages/profile.dart';
 import 'package:community/pages/signup_page.dart';
@@ -55,7 +56,8 @@ class MyApp extends StatelessWidget {
               Events.routeName: (context) => Events(),
               EditProfil.routeName: (context) => EditProfil(),
               SinglePost.routeName: (context) => SinglePost(),
-              EventP.routeName: (context) => EventP()
+              EventP.routeName: (context) => EventP(),
+              MapPage.routeName: (context) => MapPage(),
             },
           ),
         ));
