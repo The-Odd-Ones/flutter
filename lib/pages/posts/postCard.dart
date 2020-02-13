@@ -1,4 +1,7 @@
+import 'package:community/provider/post_Provider.dart';
+import 'package:community/provider/postsprovider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../models/classPost.dart';
 
 class PostCard extends StatefulWidget {
@@ -25,28 +28,9 @@ class _PostCardState extends State<PostCard> {
     }
   }
 
-  List<Post> posts = [
-    Post(
-        image:
-            'https://r-cf.bstatic.com/images/hotel/max1024x768/208/208351646.jpg',
-        user: 'Osca Wilde',
-        text: 'Be yourself; everyone else is already taken'),
-    // Post(user: 'Osca Wil', text: 'I have nothing to declare except my genius'),
-    // Post(user: 'Osca WIlde', text: 'The truth is rarely pure and never simple'),
-    Post(
-        image:
-            'https://r-cf.bstatic.com/images/hotel/max1024x768/208/208351646.jpg',
-        user: 'Osca Wilde',
-        text: 'Be yourself; everyone else is already taken'),
-    Post(
-        image:
-            'https://r-cf.bstatic.com/images/hotel/max1024x768/208/208351646.jpg',
-        user: 'Osca Wil',
-        text: 'I have nothing to declare except my genius'),
-    // Post(user: 'Osca WIlde', text: 'The truth is rarely pure and never simple'),
-  ];
+  //
 
-  Widget buildPosts(posts) {
+  Widget buildPosts(post) {
     return Card(
       color: Colors.white,
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
@@ -56,11 +40,10 @@ class _PostCardState extends State<PostCard> {
           ListTile(
             leading: CircleAvatar(
               radius: 30,
-              backgroundImage: NetworkImage(
-                  'https://hairstylecamp.com/wp-content/uploads/famous-actresses-with-brown-hair-16.jpg'),
+              backgroundImage: NetworkImage(post.userImg),
             ),
             title: Text(
-              posts.user,
+              post.username,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20,
@@ -77,12 +60,12 @@ class _PostCardState extends State<PostCard> {
           Container(
             child: Image(
               image: NetworkImage != null
-                  ? NetworkImage(posts.image)
+                  ? NetworkImage(post.file)
                   : NetworkImage(
                       'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
             ),
           ),
-          Text(posts.text),
+          Text(post.content),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
@@ -104,13 +87,15 @@ class _PostCardState extends State<PostCard> {
 
   @override
   Widget build(BuildContext context) {
+    final postData = Provider.of<PostsProvider>(context);
+    final postList = postData.posts;
     return ListView.builder(
         padding: const EdgeInsets.all(8),
-        itemCount: posts.length,
+        itemCount: postList.length,
         itemBuilder: (BuildContext context, int index) {
           return Container(
             child: Column(
-              children: posts.map((post) => buildPosts(post)).toList(),
+              children: postList.map((post) => buildPosts(post)).toList(),
             ),
           );
         });

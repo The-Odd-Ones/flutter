@@ -1,4 +1,5 @@
 import 'package:community/pages/events.dart';
+import 'package:community/pages/posts/postCard.dart';
 import 'package:community/pages/profile.dart';
 import 'package:community/widget/posts.dart';
 import 'package:community/provider/communityProvider.dart';
@@ -12,6 +13,8 @@ import 'dart:convert';
 
 class Home extends StatefulWidget {
   static const routeName = '/home';
+  String result;
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -21,16 +24,8 @@ class _HomeState extends State<Home> {
   // final community;
   @override
   void initState() {
-    // Provider.of<Products>(context).fetchAndSetProducts(); // WON'T WORK!
-    // Future.delayed(Duration.zero).then((_) {
-    //   Provider.of<Products>(context).fetchAndSetProducts();
-    // });
     Provider.of<CommunityProvider>(context, listen: false).getCommuinties();
-// setState(() {
-    //   coomuin =
-    //       Provider.of<CommunityProvider>(context, listen: false).commuinities;
-    //   print(coomuin);
-    // });
+    Provider.of<PostsProvider>(context, listen: false).getPosts('Main');
     super.initState();
   }
 
@@ -49,14 +44,6 @@ class _HomeState extends State<Home> {
                 onPressed: () {
                   Navigator.of(context).pushNamed(Profile.routeName);
                 }),
-            // IconButton(
-            //     icon: Icon(
-            //       Icons.local_post_office,
-            //       color: Colors.white,
-            //     ),
-            //     onPressed: () {
-            //       Navigator.of(context).pushNamed(Posts.routeName);
-            //     }),
             IconButton(
                 icon: Icon(
                   Icons.event,
