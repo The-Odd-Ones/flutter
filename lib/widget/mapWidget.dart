@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class MapPage extends StatefulWidget {
+  static const routeName = '/Map';
   @override
   _MapPageState createState() => _MapPageState();
 }
@@ -28,6 +29,11 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<int> location =
+        ModalRoute.of(context).settings.arguments as List<int>;
+
+    final LatLng latlag = LatLng(5, 8);
+
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
@@ -40,7 +46,7 @@ class _MapPageState extends State<MapPage> {
             GoogleMap(
               onMapCreated: _onMapCreated,
               initialCameraPosition: CameraPosition(
-                target: _center,
+                target: latlag,
                 zoom: 7.0,
               ),
               mapType: _currentMapType,
