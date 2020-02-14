@@ -67,6 +67,50 @@ class PostsProvider with ChangeNotifier {
       throw e;
     }
   }
+
+  Future<void> getPostsbyEvents(String eventId, String comuinity) async {
+    final List<SinglPost> loadedPosts = [];
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final key = 'userDate';
+    final extractedUserData = json.decode(prefs.getString(key)) as Map;
+    final token = extractedUserData['token'];
+
+    var url = '192.168.137.200:8080';
+    final userHeader = {
+      "Content-type": "application/json",
+      "authorization": "$token"
+    };
+
+    try {
+      final param = {'community': '$comuinity'};
+      final result = await http.get(
+          (new Uri.http(url, '/api/events/$eventId/posts', param)),
+          headers: userHeader);
+      final extractedData = json.decode(result.body) as Map<String, dynamic>;
+      if (extractedData.length > 0) {
+        for (var i = 0; i < extractedData['posts'].length; i++) {
+          loadedPosts.add(SinglPost(
+            id: extractedData['posts'][i]['_id'],
+            content: extractedData['posts'][i]['content'],
+            username: extractedData['posts'][i]['user']['username'],
+            userImg: extractedData['posts'][i]['user']['file'],
+            community: extractedData['posts'][i]['community'],
+            file: extractedData['posts'][i]['file'],
+            commentsCount: extractedData['posts'][i]['commentsCount'],
+            likesCount: extractedData['posts'][i]['likesCount'],
+            sharesCount: extractedData['posts'][i]['sharesCount'],
+          ));
+        }
+        _posts = loadedPosts;
+        print(_posts);
+      } else {
+        _posts = [];
+      }
+      notifyListeners();
+    } catch (e) {
+      throw e;
+    }
+  }
 }
 
 // "https://192.168.137.200:8080/api/posts?community=Art"
