@@ -32,7 +32,7 @@ class _MapPageState extends State<MapPage> {
     final List<double> location =
         ModalRoute.of(context).settings.arguments as List<double>;
 
-    final LatLng latlag = LatLng(location[0], location[1]);
+    // final LatLng latlag = LatLng(location[0], location[1]);
 
     return MaterialApp(
       home: Scaffold(
@@ -46,7 +46,7 @@ class _MapPageState extends State<MapPage> {
             GoogleMap(
               onMapCreated: _onMapCreated,
               initialCameraPosition: CameraPosition(
-                target: latlag,
+                target: _center,
                 zoom: 5.0,
               ),
               mapType: _currentMapType,
