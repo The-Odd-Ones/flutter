@@ -1,3 +1,42 @@
+// import 'dart:async';
+// import 'package:flutter/material.dart';
+// import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+// class MapPage extends StatefulWidget {
+//   static const routeName = '/Map';
+//   @override
+//   _MapPageState createState() => _MapPageState();
+// }
+
+// class _MapPageState extends State<MapPage> {
+//   GoogleMapController mapController;
+
+//   final LatLng _center = const LatLng(45, -122.677433);
+
+//   void _onMapCreated(GoogleMapController controller) {
+//     mapController = controller;
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       home: Scaffold(
+//         appBar: AppBar(
+//           title: Text('Maps Sample App'),
+//           backgroundColor: Colors.green[700],
+//         ),
+//         body: GoogleMap(
+//           onMapCreated: _onMapCreated,
+//           initialCameraPosition: CameraPosition(
+//             target: _center,
+//             zoom: 5.0,
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }
+
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -29,10 +68,11 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    final List<int> location =
-        ModalRoute.of(context).settings.arguments as List<int>;
-
-    final LatLng latlag = LatLng(5, 8);
+    final List<double> location =
+        ModalRoute.of(context).settings.arguments as List<double>;
+    print("location $location");
+    final LatLng latlag = LatLng(46, 8);
+    // final LatLng latlag = LatLng(location[0], location[1]);
 
     return MaterialApp(
       home: Scaffold(
@@ -47,7 +87,7 @@ class _MapPageState extends State<MapPage> {
               onMapCreated: _onMapCreated,
               initialCameraPosition: CameraPosition(
                 target: latlag,
-                zoom: 7.0,
+                zoom: 5.0,
               ),
               mapType: _currentMapType,
             ),
