@@ -89,15 +89,6 @@ class _HomeState extends State<Home> {
                 Navigator.of(context).pushNamed(Events.routeName);
               },
             ),
-            IconButton(
-              icon: Icon(
-                Icons.map,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.of(context).pushNamed(MapPage.routeName);
-              },
-            ),
           ],
         ),
         drawer: AppDrawer(),
