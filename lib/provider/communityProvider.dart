@@ -29,7 +29,7 @@ class CommunityProvider with ChangeNotifier {
     final extractedUserData = json.decode(prefs.getString(key)) as Map;
     final token = extractedUserData['token'];
 
-    final url = '192.168.137.200:8080';
+    final url = '192.168.3.207:8080';
     final userHeader = {
       "Content-type": "application/json",
       "authorization": "$token"

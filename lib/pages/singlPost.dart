@@ -75,20 +75,7 @@ class _SinglePostState extends State<SinglePost> {
                             ),
                           ),
                         ),
-                        Container(
-                          child: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            //if there is file
-                            children: <Widget>[
-                              Image(
-                                image: NetworkImage(
-                                  post.file,
-                                  scale: 3,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
+
                         Container(
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
@@ -106,6 +93,7 @@ class _SinglePostState extends State<SinglePost> {
                               ],
                             ),
                           ),
+                        ),
                           Container(
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),
@@ -119,16 +107,14 @@ class _SinglePostState extends State<SinglePost> {
                                           color: Colors.red,
                                           size: 25,
                                         ),
-                                        onTap: () {
-                                          print('onTap called');
-                                        },
-                                      ),
+
+
                                       onTap: () {
                                         setState(() {
                                           print('clicked');
                                           showComment();
                                         });
-                                      },
+                                      }
                                     ),
                                     GestureDetector(
                                       child: Icon(
@@ -139,7 +125,7 @@ class _SinglePostState extends State<SinglePost> {
                                       // onTap will be changed and work correctly with the back ena
                                       onTap: () {
                                         print('onTap called');
-                                      },
+                                      }
                                     )
                                   ],
                                 ),
@@ -149,16 +135,17 @@ class _SinglePostState extends State<SinglePost> {
                         ),
                       ],
                     ),
-                    Container(
-
-                    ),
+                    Container(),
                   ],
                 ),
               ],
             ),
+
           ),
-        ),
+
+    ),
       ),
-    );
+);
+
   }
 }

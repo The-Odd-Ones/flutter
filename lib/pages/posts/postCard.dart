@@ -49,7 +49,7 @@ class _PostCardState extends State<PostCard> {
                 fontSize: 20,
               ),
             ),
-<<<<<<< HEAD
+
             subtitle: Text(
               'marooo',
               style: TextStyle(

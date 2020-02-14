@@ -31,7 +31,7 @@ class EventsProvider with ChangeNotifier {
     final key = 'userDate';
     final extractedUserData = json.decode(prefs.getString(key)) as Map;
     final token = extractedUserData['token'];
-    var url = '192.168.137.200:8080';
+    var url = '192.168.3.207:8080';
     final userHeader = {
       "Content-type": "application/json",
       "authorization": "$token"
