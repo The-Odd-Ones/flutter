@@ -1,3 +1,6 @@
+import 'package:community/pages/singlPost.dart';
+import 'package:community/provider/communityProvider.dart';
+import 'package:community/provider/postsprovider.dart';
 import 'package:flutter/material.dart';
 import '../models/classPost.dart';
 import '../models/classEvent.dart';
@@ -156,13 +159,82 @@ class _EventPState extends State<EventP> {
     );
   }
 
+  Widget buildPosts(post) {
+    return Card(
+      color: Colors.white,
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
+      child: GestureDetector(
+        onTap: () {
+          Navigator.of(context)
+              .pushNamed(SinglePost.routeName, arguments: post.id);
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              leading: CircleAvatar(
+                radius: 30,
+                backgroundImage: NetworkImage(post.userImg),
+              ),
+              title: Text(
+                post.username,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 20,
+                ),
+              ),
+              subtitle: Text(
+                'marooo',
+                style: TextStyle(
+                  color: Colors.grey,
+                  fontSize: 10,
+                ),
+              ),
+            ),
+            Container(
+              child: Image(
+                image: post.file != null
+                    ? NetworkImage(post.file)
+                    : NetworkImage(
+                        'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
+              ),
+            ),
+            Text(post.content),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                // verifLiked(),
+                Icon(
+                  Icons.share,
+                  color: Colors.grey,
+                ),
+                Icon(
+                  Icons.comment,
+                  color: Colors.grey,
+                )
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Widget build(BuildContext context) {
     Provider.of<EventsProvider>(context);
+    Provider.of<PostsProvider>(context);
+    Provider.of<CommunityProvider>(context);
     final eventId = ModalRoute.of(context).settings.arguments as String;
     Size screenSize = MediaQuery.of(context).size;
     final eventData = Provider.of<EventsProvider>(context);
+    final postProv = Provider.of<PostsProvider>(context);
+    final commProv = Provider.of<CommunityProvider>(context);
+
     final event =
         eventData.events.firstWhere((element) => element.id == eventId);
+
+    // final commuinty = commProv.commuinities
+    //     .firstWhere((element) => element.commuintyId == event.id);
 
     return Scaffold(
       // backgroundColor: Colors.grey[100],
