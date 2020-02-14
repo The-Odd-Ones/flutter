@@ -31,7 +31,7 @@ class PostsProvider with ChangeNotifier {
     final key = 'userDate';
     final extractedUserData = json.decode(prefs.getString(key)) as Map;
     final token = extractedUserData['token'];
-    var url = '192.168.137.60:8080';
+    var url = '192.168.137.141:8080';
     final userHeader = {
       "Content-type": "application/json",
       "authorization": "$token"
@@ -68,6 +68,41 @@ class PostsProvider with ChangeNotifier {
     }
   }
 
+  Future<void> addPost(SinglPost single) async {
+    final url = '192.168.137.141:8080';
+
+    try {
+      final result = await http.post(
+        new Uri.http(url, "api/post"),
+        body: json.encode({
+          'content': single.content,
+          'username': single.username,
+          'userImg': single.userImg,
+          'community': single.community,
+          'file': single.file,
+          'commentsCount': single.commentsCount,
+          'likesCount': single.likesCount,
+          'sharesCount': single.sharesCount,
+        }),
+      );
+      final newPost = SinglPost(
+        id: single.id,
+        content: single.content,
+        username: single.username,
+        userImg: single.userImg,
+        community: single.community,
+        file: single.file,
+        commentsCount: single.commentsCount,
+        likesCount: single.likesCount,
+        sharesCount: single.sharesCount,
+      );
+      _posts.add(newPost);
+      notifyListeners();
+    } catch (e) {
+      throw e;
+    }
+  }
+
   Future<void> getPostsbyEvents(String eventId, String comuinity) async {
     final List<SinglPost> loadedPosts = [];
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -75,7 +110,7 @@ class PostsProvider with ChangeNotifier {
     final extractedUserData = json.decode(prefs.getString(key)) as Map;
     final token = extractedUserData['token'];
 
-    var url = '192.168.137.60:8080';
+    var url = '192.168.137.141:8080';
     final userHeader = {
       "Content-type": "application/json",
       "authorization": "$token"
@@ -106,11 +141,10 @@ class PostsProvider with ChangeNotifier {
       } else {
         _posts = [];
       }
-      notifyListeners();
     } catch (e) {
       throw e;
     }
   }
 }
 
-// "https://192.168.137.200:8080/api/posts?community=Art"
+// "https://192.168.137.141:8080/api/posts?community=Art"

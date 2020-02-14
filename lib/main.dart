@@ -20,7 +20,7 @@ import './pages/login_page.dart';
 import 'package:community/pages/editProfil.dart';
 import 'package:community/pages/singlPost.dart';
 import 'package:community/pages/editProfil.dart';
-//
+import 'package:community/widget/imageCapture.dart';
 
 void main() {
   runApp(MyApp());

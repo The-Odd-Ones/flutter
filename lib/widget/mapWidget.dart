@@ -47,7 +47,7 @@ class _MapPageState extends State<MapPage> {
               onMapCreated: _onMapCreated,
               initialCameraPosition: CameraPosition(
                 target: latlag,
-                zoom: 7.0,
+                zoom: 5.0,
               ),
               mapType: _currentMapType,
             ),
