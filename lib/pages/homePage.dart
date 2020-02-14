@@ -72,9 +72,7 @@ class _HomeState extends State<Home> {
                 final result =
                     Provider.of<CommunityProvider>(context, listen: false)
                         .commuinities[1];
-                print(result);
-                await Provider.of<EventsProvider>(context, listen: false)
-                    .getEvents(result);
+                print(result.commuinty);
               },
             ),
             Expanded(

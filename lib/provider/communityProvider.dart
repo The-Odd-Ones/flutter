@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:community/pages/community.dart';
+import 'package:community/provider/singleCommunity.dart';
 import 'package:community/provider/user_provider.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/cupertino.dart';
@@ -7,19 +8,11 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../helper/getToken.dart';
 
-class SingleCommuinty {
-  String commuintyId;
-  String commuinty;
-  SingleCommuinty({@required this.commuintyId, @required this.commuinty});
-}
-
 class CommunityProvider with ChangeNotifier {
-  dynamic authToken;
-  String userId;
-  List<String> _commuinities = [];
+  List<SingleCommuinty> _commuinities = [];
   CommunityProvider();
 
-  List<String> get commuinities {
+  List<SingleCommuinty> get commuinities {
     return [..._commuinities];
   }
 
@@ -37,14 +30,17 @@ class CommunityProvider with ChangeNotifier {
     try {
       final result = await http.get((new Uri.http(url, "/api/communities")),
           headers: userHeader);
-      final extractedData = json.decode(result.body) as Map<String, dynamic>;
+      final extractedData = json.decode(result.body) as Map;
       if (extractedData == null) {
         return;
       }
-      final List<String> loadedCommuinities = [];
+      final List<SingleCommuinty> loadedCommuinities = [];
 
       for (var i = 0; i < extractedData['result'].length; i++) {
-        loadedCommuinities.add(extractedData['result'][i]['name']);
+        loadedCommuinities.add(SingleCommuinty(
+          commuintyId: extractedData['result'][i]['_id'],
+          commuinty: extractedData['result'][i]['name'],
+        ));
       }
       // print(extractedData);
       // extractedData['result'].forEach((key, value) {

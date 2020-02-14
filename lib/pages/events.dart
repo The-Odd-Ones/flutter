@@ -142,6 +142,7 @@ class _EventsState extends State<Events> {
   }
 
   Future navigateToEventP(context, event) async {
+    print(event.location);
     Navigator.of(context).pushNamed(EventP.routeName, arguments: event.id);
   }
 
