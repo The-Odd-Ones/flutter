@@ -29,10 +29,10 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    final List<int> location =
-        ModalRoute.of(context).settings.arguments as List<int>;
+    final List<double> location =
+        ModalRoute.of(context).settings.arguments as List<double>;
 
-    final LatLng latlag = LatLng(5, 8);
+    final LatLng latlag = LatLng(location[0], location[1]);
 
     return MaterialApp(
       home: Scaffold(
