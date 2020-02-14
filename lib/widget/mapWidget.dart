@@ -29,10 +29,10 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    final List<int> location =
-        ModalRoute.of(context).settings.arguments as List<int>;
+    final location = ModalRoute.of(context).settings.arguments as List;
+    print(location);
 
-    final LatLng latlag = LatLng(5, 8);
+    final LatLng latlag = LatLng(location[0], location[1]);
 
     return MaterialApp(
       home: Scaffold(
@@ -47,7 +47,7 @@ class _MapPageState extends State<MapPage> {
               onMapCreated: _onMapCreated,
               initialCameraPosition: CameraPosition(
                 target: latlag,
-                zoom: 7.0,
+                zoom: 5.0,
               ),
               mapType: _currentMapType,
             ),
