@@ -2,6 +2,7 @@ import 'package:community/provider/postsprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zoom_widget/zoom_widget.dart';
+import 'package:community/widget/onecomment.dart';
 
 class SinglePost extends StatefulWidget {
   static const routeName = '/SinglePost';
@@ -11,6 +12,7 @@ class SinglePost extends StatefulWidget {
 
 class _SinglePostState extends State<SinglePost> {
   //this function show all comments
+
   Widget showComment() {
     return Card(
       color: Colors.white,
@@ -68,6 +70,10 @@ class _SinglePostState extends State<SinglePost> {
                           style:
                               TextStyle(fontSize: 25, color: Colors.indigo),
                         ),
+                        Divider(
+                          color: Colors.white30,
+
+                        ),
                         Container(
                           child: Text(post.content,
                             style: TextStyle(
@@ -116,6 +122,18 @@ class _SinglePostState extends State<SinglePost> {
                                         });
                                       }
                                     ),
+                                      GestureDetector(
+                                          child: Icon(
+                                            Icons.comment,
+                                            color: Colors.grey,
+                                            size: 25,
+                                          ),
+                                          // onTap will be changed and work correctly with the back ena
+                                          onTap: () {
+                                            print('onTap called');
+                                          }
+                                      ),
+
                                     GestureDetector(
                                       child: Icon(
                                         Icons.share,
@@ -135,7 +153,9 @@ class _SinglePostState extends State<SinglePost> {
                         ),
                       ],
                     ),
-                    Container(),
+                    Container(
+
+                    ),
                   ],
                 ),
               ],

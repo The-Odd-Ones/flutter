@@ -20,6 +20,7 @@ import './pages/login_page.dart';
 import 'package:community/pages/editProfil.dart';
 import 'package:community/pages/singlPost.dart';
 import 'package:community/pages/editProfil.dart';
+import 'package:community/widget/onecomment.dart';
 //
 
 void main() {
@@ -29,7 +30,12 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return OneComment();
+  }
+}
+
+/*
+MultiProvider(
         providers: [
           ChangeNotifierProvider.value(value: UserProvider()),
           ChangeNotifierProvider.value(value: CommunityProvider()),
@@ -61,5 +67,4 @@ class MyApp extends StatelessWidget {
             },
           ),
         ));
-  }
-}
+ */
