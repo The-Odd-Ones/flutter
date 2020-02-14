@@ -46,7 +46,8 @@ class _EventPState extends State<EventP> {
       height: screenSize.height / 4,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/profile.png"),
+          image: NetworkImage(
+              'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -233,9 +234,9 @@ class _EventPState extends State<EventP> {
     final event =
         eventData.events.firstWhere((element) => element.id == eventId);
 
-    // final commuinty = commProv.commuinities
-    //     .firstWhere((element) => element.commuintyId == event.id);
-
+    final commuinty = commProv.commuinities
+        .firstWhere((element) => element.commuintyId == event.community);
+    final postData = postProv.getPostsbyEvents(eventId, commuinty.commuintyId);
     return Scaffold(
       // backgroundColor: Colors.grey[100],
       appBar: AppBar(
@@ -254,9 +255,9 @@ class _EventPState extends State<EventP> {
                 ]),
               ],
             ),
-            // Column(
-            //   children: posts.map((post) => postTemplate(post)).toList(),
-            // ),
+            Column(
+              children: postProv.posts.map((post) => buildPosts(post)).toList(),
+            ),
           ],
         ),
       ),
