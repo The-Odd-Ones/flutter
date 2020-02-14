@@ -29,8 +29,8 @@ class _MapPageState extends State<MapPage> {
 
   @override
   Widget build(BuildContext context) {
-    final List<double> location =
-        ModalRoute.of(context).settings.arguments as List<double>;
+    final location = ModalRoute.of(context).settings.arguments as List;
+    print(location);
 
     // final LatLng latlag = LatLng(location[0], location[1]);
 
