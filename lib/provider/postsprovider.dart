@@ -68,35 +68,40 @@ class PostsProvider with ChangeNotifier {
     }
   }
 
-  // Future<void> savePost(String post, String image) async {
-  //   const url = '192.168.137.200:8080';
-  //   const postHeader = {"Content-type": "application/json"};
-  //   Map bodyPost = {
-  //     'post': post,
-  //     'image': image
-  //   };
-  //   try {
-  //     final result = await http.post(new Uri.http(url, "api/post"),
-  //         body: json.encode(bodyPost), headers: postHeader);
+  Future<void> addPost(SinglPost single) async {
+    final url = '192.168.137.141:8080';
 
-  //     final resultData = json.decode(result.body);
-  //     if (resultData['success'] == true) {
-  //       _token = resultData['token'];
-  //       final postResult = resultData['post'];
-  //       _postId = postResult['_id'];
-  //       _post = postResult['post'];
-  //       _image = postResult['image'];
-  //       _savepostData(
-  //           _token, _postId, post, image);
-  //     } else {
-  //       throw HttpException(resultData['msg']);
-  //     }
-  //   } catch (e) {
-  //     throw e;
-  //   }
-
-  //   notifyListeners();
-  // }
+    try {
+      final result = await http.post(
+        new Uri.http(url, "api/post"),
+        body: json.encode({
+          'content': single.content,
+          'username': single.username,
+          'userImg': single.userImg,
+          'community': single.community,
+          'file': single.file,
+          'commentsCount': single.commentsCount,
+          'likesCount': single.likesCount,
+          'sharesCount': single.sharesCount,
+        }),
+      );
+      final newPost = SinglPost(
+        id: single.id,
+        content: single.content,
+        username: single.username,
+        userImg: single.userImg,
+        community: single.community,
+        file: single.file,
+        commentsCount: single.commentsCount,
+        likesCount: single.likesCount,
+        sharesCount: single.sharesCount,
+      );
+      _posts.add(newPost);
+      notifyListeners();
+    } catch (e) {
+      throw e;
+    }
+  }
 }
 
 // "https://192.168.137.200:8080/api/posts?community=Art"

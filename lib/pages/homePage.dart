@@ -2,7 +2,6 @@ import 'package:community/pages/events.dart';
 import 'package:community/pages/posts/postCard.dart';
 import 'package:community/pages/profile.dart';
 import 'package:community/widget/posts.dart';
-import 'package:community/widget/addPost.dart';
 import 'package:community/provider/communityProvider.dart';
 import 'package:community/provider/postsprovider.dart';
 import 'package:community/provider/user_provider.dart';
@@ -11,7 +10,9 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
-import '../widget/addPost.dart';
+import '../widget/imageCapture.dart';
+import 'package:community/pages/homePage.dart';
+import 'package:community/models/http_exception.dart';
 
 class Home extends StatefulWidget {
   static const routeName = '/home';
@@ -34,6 +35,33 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final GlobalKey<FormState> _formKey = GlobalKey();
+    Map _postData = {
+      'community': '',
+      'content': '',
+      'file': '',
+      'event': '',
+      'user': '',
+    };
+    void saveForm() async {
+      if (!_formKey.currentState.validate()) {
+        // Invalid!
+        return;
+      }
+      _formKey.currentState.save();
+      // print(_authData);
+      try {
+        await Provider.of<PostsProvider>(context, listen: false).addPost(
+          _postData['content'],
+          // _postData['content'],
+          // _postData['file'],
+          // _postData['event'],
+          // _postData['user']
+        );
+        Navigator.of(context).pushNamed(Home.routeName);
+      } on HttpException catch (e) {
+        throw e;
+      }
+    }
 
     return Center(
       child: Scaffold(
@@ -98,10 +126,16 @@ class _HomeState extends State<Home> {
                                 ),
                                 TextFormField(
                                   decoration: const InputDecoration(
-                                    labelText: 'Image',
+                                    hintText: 'Enter your image',
+                                    labelText: 'image',
                                   ),
-                                  textInputAction: TextInputAction.next,
                                 ),
+                                // FlatButton(
+                                //     child: Text('Upload an Image'),
+                                //     onPressed: () {
+                                //       Navigator.of(context)
+                                //           .pushNamed(ImageCap.routeName);
+                                //     }),
                               ],
                             ),
                           ),
