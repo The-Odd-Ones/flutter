@@ -2,6 +2,7 @@ import 'package:community/pages/events.dart';
 import 'package:community/pages/posts/postCard.dart';
 import 'package:community/pages/profile.dart';
 import 'package:community/provider/eventsProvider.dart';
+import 'package:community/widget/mapWidget.dart';
 import 'package:community/widget/posts.dart';
 import 'package:community/provider/communityProvider.dart';
 import 'package:community/provider/postsprovider.dart';
@@ -71,21 +72,32 @@ class _HomeState extends State<Home> {
           title: Text('comunity'),
           actions: <Widget>[
             IconButton(
-                icon: Icon(
-                  Icons.portrait,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(Profile.routeName);
-                }),
+              icon: Icon(
+                Icons.portrait,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed(Profile.routeName);
+              },
+            ),
             IconButton(
-                icon: Icon(
-                  Icons.event,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  Navigator.of(context).pushNamed(Events.routeName);
-                }),
+              icon: Icon(
+                Icons.event,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed(Events.routeName);
+              },
+            ),
+            IconButton(
+              icon: Icon(
+                Icons.map,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                Navigator.of(context).pushNamed(MapPage.routeName);
+              },
+            ),
           ],
         ),
         drawer: AppDrawer(),
