@@ -36,7 +36,7 @@ class UserProvider with ChangeNotifier {
 
   Future<void> signup(String username, String firstname, String lastname,
       String email, String password) async {
-    const url = '192.168.137.200:8080';
+    const url = '192.168.3.207:8080';
     const userHeader = {"Content-type": "application/json"};
     Map bodyUser = {
       'username': username,

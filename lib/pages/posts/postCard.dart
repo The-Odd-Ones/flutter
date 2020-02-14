@@ -61,7 +61,7 @@ class _PostCardState extends State<PostCard> {
           ),
           Container(
             child: Image(
-              image: NetworkImage != null
+              image: post.file!= null
                   ? NetworkImage(post.file)
                   : NetworkImage(
                       'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
