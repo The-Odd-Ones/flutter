@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:ffi';
 import 'dart:io';
+import 'package:community/provider/postComment.dart';
 import 'package:community/provider/post_Provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -15,10 +16,16 @@ class PostsProvider with ChangeNotifier {
   List<SinglPost> _posts = [];
   // List<SinglPost> _posts;
 
+  List<PostComment> _comments = [];
+
   PostsProvider();
 
   List<SinglPost> get posts {
     return [..._posts];
+  }
+
+  List<PostComment> get comments {
+    return [..._comments];
   }
 
   SinglPost findById(String id) {
@@ -141,6 +148,47 @@ class PostsProvider with ChangeNotifier {
       } else {
         _posts = [];
       }
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  Future<void> getCommentsOnPost(String postId, String comuinity) async {
+    final List<PostComment> loadedComments = [];
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final key = 'userDate';
+    final extractedUserData = json.decode(prefs.getString(key)) as Map;
+    final token = extractedUserData['token'];
+
+    var url = '192.168.137.60:8080';
+    final userHeader = {
+      "Content-type": "application/json",
+      "authorization": "$token"
+    };
+
+    try {
+      final param = {'community': '$comuinity'};
+      final result = await http.get(
+          (new Uri.http(url, '/api/posts/$postId/comments', param)),
+          headers: userHeader);
+
+      final extractedData = json.decode(result.body) as Map<String, dynamic>;
+      if (extractedData['result'].length > 0) {
+        for (var i = 0; i < extractedData['result'].length; i++) {
+          loadedComments.add(PostComment(
+              id: extractedData['result'][i]['_id'],
+              username: extractedData['result'][i]['user']['username'],
+              userImg: extractedData['result'][i]['user']['file'],
+              post: extractedData['result'][i]['post'],
+              content: extractedData['result'][i]['content'],
+              likesCount: extractedData['result'][i]['likesCount'],
+              commentsCount: extractedData['result'][i]['commentsCount']));
+        }
+        _comments = loadedComments;
+      } else {
+        _comments = [];
+      }
+      print(_comments);
     } catch (e) {
       throw e;
     }

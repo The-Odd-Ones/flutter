@@ -1,3 +1,4 @@
+import 'package:community/provider/communityProvider.dart';
 import 'package:community/provider/postsprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -11,7 +12,7 @@ class SinglePost extends StatefulWidget {
 
 class _SinglePostState extends State<SinglePost> {
   //this function show all comments
-  Widget showComment() {
+  Widget showComment(comments) {
     return Card(
       color: Colors.white,
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
@@ -19,8 +20,7 @@ class _SinglePostState extends State<SinglePost> {
         children: <Widget>[
           Container(
               child: Image(
-            image: NetworkImage(
-                'https://r-cf.bstatic.com/images/hotel/max1024x768/208/208351646.jpg'),
+            image: NetworkImage(comments.userImg),
           )),
           Container(),
         ],
@@ -32,7 +32,12 @@ class _SinglePostState extends State<SinglePost> {
   Widget build(BuildContext context) {
     final postId = ModalRoute.of(context).settings.arguments as String;
     final postData = Provider.of<PostsProvider>(context);
+    final communtiyData = Provider.of<CommunityProvider>(context);
+
     final post = postData.posts.firstWhere((element) => element.id == postId);
+    final community = communtiyData.commuinities
+        .firstWhere((element) => element.commuintyId == post.community);
+    final comments = postData.getCommentsOnPost(post.id, community.commuinty);
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.black,
@@ -99,7 +104,7 @@ class _SinglePostState extends State<SinglePost> {
                                         onTap: () {
                                           setState(() {
                                             print('clicked');
-                                            showComment();
+                                            showComment(comments);
                                           });
                                         },
                                       ),
