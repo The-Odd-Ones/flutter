@@ -20,6 +20,10 @@ class _MapPageState extends State<MapPage> {
 
   @override
   void initState() {
+    final location = ModalRoute.of(context).settings.arguments as List;
+    // print(location);
+
+    final LatLng latlag = LatLng(location[0], location[1]);
     super.initState();
     allMarkers.add(
       Marker(
@@ -28,18 +32,18 @@ class _MapPageState extends State<MapPage> {
         onTap: () {
           print('Marker Tapped');
         },
-        position: LatLng(55, 50),
+        position: latlag,
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    // final location = ModalRoute.of(context).settings.arguments as List;
-    // // print(location);
+    final location = ModalRoute.of(context).settings.arguments as List;
+    // print(location);
 
-    // final LatLng latlag = LatLng(location[0], location[1]);
-    final LatLng latlag = LatLng(55, 50);
+    final LatLng latlag = LatLng(location[0], location[1]);
+    // final LatLng latlag = LatLng(55, 50);
 
     return MaterialApp(
       home: Scaffold(
