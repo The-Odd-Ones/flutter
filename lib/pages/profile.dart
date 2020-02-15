@@ -7,7 +7,6 @@ import '../widget/followersWidget.dart';
 import '../widget/followingWidget.dart';
 import '../widget/posts.dart';
 
-
 //import './editProfile.dar';
 class Profile extends StatefulWidget {
   static const routeName = '/profile';

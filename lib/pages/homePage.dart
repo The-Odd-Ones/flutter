@@ -69,12 +69,9 @@ class _HomeState extends State<Home> {
     return Center(
       child: Scaffold(
         appBar: AppBar(
-
-            backgroundColor: Colors.greenAccent,
-            elevation: 4.0,
-            centerTitle: true,
-         
-
+          backgroundColor: Colors.greenAccent,
+          elevation: 4.0,
+          centerTitle: true,
           title: Text('comunity'),
           actions: <Widget>[
             IconButton(
@@ -95,15 +92,6 @@ class _HomeState extends State<Home> {
                 Navigator.of(context).pushNamed(Events.routeName);
               },
             ),
-            // IconButton(
-            //   icon: Icon(
-            //     Icons.map,
-            //     color: Colors.white,
-            //   ),
-            //   onPressed: () {
-            //     Navigator.of(context).pushNamed(MapPage.routeName);
-            //   },
-            // ),
           ],
         ),
         drawer: AppDrawer(),
