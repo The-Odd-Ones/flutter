@@ -65,7 +65,7 @@ class _EventPState extends State<EventP> {
             image: event.file != null
                 ? NetworkImage(event.file)
                 : NetworkImage(
-                    'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
+                'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.circular(80),

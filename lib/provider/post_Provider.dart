@@ -10,6 +10,7 @@ class SinglPost with ChangeNotifier {
   final String community;
   final String content;
   final String file;
+
   final int commentsCount;
   final int sharesCount;
   final int likesCount;
@@ -44,3 +45,5 @@ class SinglPost with ChangeNotifier {
     };
   }
 }
+
+//192.168.3.207

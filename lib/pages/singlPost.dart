@@ -2,6 +2,7 @@ import 'package:community/provider/postsprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:zoom_widget/zoom_widget.dart';
+import 'package:community/widget/onecomment.dart';
 
 class SinglePost extends StatefulWidget {
   static const routeName = '/SinglePost';
@@ -11,6 +12,7 @@ class SinglePost extends StatefulWidget {
 
 class _SinglePostState extends State<SinglePost> {
   //this function show all comments
+
   Widget showComment() {
     return Card(
       color: Colors.white,
@@ -30,13 +32,27 @@ class _SinglePostState extends State<SinglePost> {
 
   @override
   Widget build(BuildContext context) {
+
     final postId = ModalRoute.of(context).settings.arguments as String;
     final postData = Provider.of<PostsProvider>(context);
     final post = postData.posts.firstWhere((element) => element.id == postId);
+
+    int nbcomment = post.commentsCount ;
+    String comm = "$nbcomment";
+    //
+
+
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.black,
+        appBar: AppBar(
+          backgroundColor: Colors.greenAccent,
+          elevation: 4.0,
+          centerTitle: true,
+          title: Text('Single Post'),
+        ),
+        backgroundColor: Colors.white,
         body: SafeArea(
+
           child: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -44,22 +60,34 @@ class _SinglePostState extends State<SinglePost> {
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    Card(
-                      child: Column(
-                        children: <Widget>[
-                          CircleAvatar(
-                            backgroundImage: NetworkImage(post.userImg),
-                            radius: 50,
+                    Column(
+                      children: <Widget>[
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(post.userImg),
+                          radius: 50,
+                        ),
+                        Text(
+                          post.username,
+                          style:
+                              TextStyle(fontSize: 25, color: Colors.indigo),
+                        ),
+                        Divider(
+                          color: Colors.white30,
+
+                        ),
+                        Container(
+                          child: Text(post.content,
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
                           ),
-                          Text(
-                            post.username,
-                            style:
-                                TextStyle(fontSize: 25, color: Colors.indigo),
-                          ),
-                          Container(
+                        ),
+
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
-                              //if there is file
                               children: <Widget>[
                                 Image(
                                   image: post.file != null
@@ -73,6 +101,7 @@ class _SinglePostState extends State<SinglePost> {
                               ],
                             ),
                           ),
+                        ),
                           Container(
                             child: Padding(
                               padding: const EdgeInsets.all(20.0),
@@ -86,50 +115,69 @@ class _SinglePostState extends State<SinglePost> {
                                           color: Colors.red,
                                           size: 25,
                                         ),
-                                        onTap: () {
-                                          print('onTap called');
-                                        },
-                                      ),
+
+
+                                      onTap: () {
+                                        setState(() {
+                                          print('clicked');
+                                          showComment();
+                                        });
+                                      }
+                                    ),
                                       GestureDetector(
-                                        child: Icon(
-                                          Icons.comment,
-                                          color: Colors.grey,
-                                          size: 25,
-                                        ),
-                                        onTap: () {
-                                          setState(() {
-                                            print('clicked');
-                                            showComment();
-                                          });
-                                        },
+                                          child: Icon(
+                                            Icons.comment,
+                                            color: Colors.grey,
+                                            size: 25,
+                                          ),
+                                          // onTap will be changed and work correctly with the back ena
+                                          onTap: () {
+                                            print('onTap called');
+                                          }
                                       ),
-                                      GestureDetector(
-                                        child: Icon(
-                                          Icons.share,
-                                          color: Colors.grey,
-                                          size: 25,
-                                        ),
-                                        // onTap will be changed and work correctly with the back ena
-                                        onTap: () {
-                                          print('onTap called');
-                                        },
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
+
+                                    GestureDetector(
+                                      child: Icon(
+                                        Icons.share,
+                                        color: Colors.grey,
+                                        size: 25,
+                                      ),
+                                      // onTap will be changed and work correctly with the back ena
+                                      onTap: () {
+                                        print('onTap called');
+                                      }
+                                    )
+                                  ],
+                                ),
+                              ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
+
                   ],
                 ),
+                Flexible(
+                    child: OneComment()
+                ),
+
               ],
             ),
+
           ),
-        ),
+
+    ),
       ),
-    );
+);
+
   }
 }
+
+/*
+Column(
+                      children: <Widget>[
+                        OneComment(),
+                      ],
+                    )
+ */
