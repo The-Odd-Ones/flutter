@@ -31,7 +31,7 @@ class PostsProvider with ChangeNotifier {
     final key = 'userDate';
     final extractedUserData = json.decode(prefs.getString(key)) as Map;
     final token = extractedUserData['token'];
-    var url = '192.168.137.60:8080';
+    var url = '192.168.3.207:8080';
     final userHeader = {
       "Content-type": "application/json",
       "authorization": "$token"
@@ -55,6 +55,8 @@ class PostsProvider with ChangeNotifier {
             commentsCount: extractedData['posts'][i]['commentsCount'],
             likesCount: extractedData['posts'][i]['likesCount'],
             sharesCount: extractedData['posts'][i]['sharesCount'],
+
+
           ));
         }
         _posts = loadedPosts;
@@ -69,7 +71,7 @@ class PostsProvider with ChangeNotifier {
   }
 
   Future<void> addPost(SinglPost single) async {
-    final url = '192.168.137.60:8080';
+    final url = '192.168.3.207:8080';
 
     try {
       final result = await http.post(
@@ -110,7 +112,7 @@ class PostsProvider with ChangeNotifier {
     final extractedUserData = json.decode(prefs.getString(key)) as Map;
     final token = extractedUserData['token'];
 
-    var url = '192.168.137.60:8080';
+    var url = '192.168.3.207:8080';
     final userHeader = {
       "Content-type": "application/json",
       "authorization": "$token"

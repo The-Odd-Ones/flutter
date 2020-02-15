@@ -43,23 +43,23 @@ class _LoginState extends State<Login> {
 
                 Center(
                   child: Text('Welcome to community App',
-                  style: TextStyle(
-                    fontSize: 20,
-                    color: Colors.lightGreen,
-                    fontFamily: 'Galada',
-                  ),
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.lightGreen,
+                      fontFamily: 'Galada',
+                    ),
                   ),
                 ),
                 TextFormField(
 
-                decoration: InputDecoration(labelText: 'User Name',
+                  decoration: InputDecoration(labelText: 'User Name',
 
-                    contentPadding: EdgeInsets.all(5),
-                    border: new OutlineInputBorder(
-                    borderRadius: new BorderRadius.circular(25.0),
-                    borderSide: new BorderSide(
+                      contentPadding: EdgeInsets.all(5),
+                      border: new OutlineInputBorder(
+                        borderRadius: new BorderRadius.circular(25.0),
+                        borderSide: new BorderSide(
 
-                ),)
+                        ),)
                   ),
                   textInputAction: TextInputAction.next,
                   validator: (value) {
@@ -74,8 +74,8 @@ class _LoginState extends State<Login> {
                 ),
                 TextFormField(
                   decoration: InputDecoration(labelText: 'Password',
-                        contentPadding: EdgeInsets.all(5),
-                        border: new OutlineInputBorder(
+                      contentPadding: EdgeInsets.all(5),
+                      border: new OutlineInputBorder(
                         borderRadius: new BorderRadius.circular(25.0),
                         borderSide: new BorderSide(
                         ),)
@@ -150,7 +150,7 @@ class _LoginState extends State<Login> {
           .toString()
           .contains('password should be 8 digits or more')) {
         errorMessage =
-            'This password is too weak, password should be 8 digits or more.';
+        'This password is too weak, password should be 8 digits or more.';
       } else if (error.toString().contains('User not found')) {
         errorMessage = 'Could not find a user with that username.';
       } else if (error.toString().contains('Password is incorrect')) {

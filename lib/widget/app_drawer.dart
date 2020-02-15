@@ -21,6 +21,7 @@ class AppDrawer extends StatelessWidget {
       child: Column(
         children: <Widget>[
           AppBar(
+            backgroundColor: Colors.greenAccent,
             title: Text('Hello Friend!'),
             automaticallyImplyLeading: false,
           ),

@@ -36,9 +36,8 @@ class _PostCardState extends State<PostCard> {
       color: Colors.white,
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
       child: GestureDetector(
-        onTap: () {
-          Navigator.of(context)
-              .pushNamed(SinglePost.routeName, arguments: post.id);
+        onTap: (){
+          Navigator.of(context).pushNamed(SinglePost.routeName,arguments: post.id);
         },
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -55,17 +54,19 @@ class _PostCardState extends State<PostCard> {
                   fontSize: 20,
                 ),
               ),
+
               subtitle: Text(
                 'marooo',
                 style: TextStyle(
                   color: Colors.grey,
                   fontSize: 10,
+
                 ),
               ),
             ),
             Container(
               child: Image(
-                image: post.file != null
+                image: post.file!= null
                     ? NetworkImage(post.file)
                     : NetworkImage(
                         'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),

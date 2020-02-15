@@ -10,6 +10,7 @@ class SinglPost with ChangeNotifier {
   final String community;
   final String content;
   final String file;
+
   final int commentsCount;
   final int sharesCount;
   final int likesCount;
@@ -23,6 +24,7 @@ class SinglPost with ChangeNotifier {
       @required this.community,
       @required this.content,
       this.file,
+
       this.commentsCount,
       this.likesCount,
       this.sharesCount,
@@ -38,9 +40,11 @@ class SinglPost with ChangeNotifier {
     final oldStatus = isLiked;
     isLiked = !isLiked;
     notifyListeners();
-    final url = '192.168.137.60:8080';
+    final url = '192.168.3.207:8080';
     const userHeader = {
       "Content-type": "application/json",
     };
   }
 }
+
+//192.168.3.207
