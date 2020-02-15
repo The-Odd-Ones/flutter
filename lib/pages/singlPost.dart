@@ -32,6 +32,7 @@ class _SinglePostState extends State<SinglePost> {
 
   @override
   Widget build(BuildContext context) {
+
     final postId = ModalRoute.of(context).settings.arguments as String;
     final postData = Provider.of<PostsProvider>(context);
     final post = postData.posts.firstWhere((element) => element.id == postId);
@@ -49,7 +50,7 @@ class _SinglePostState extends State<SinglePost> {
           centerTitle: true,
           title: Text('Single Post'),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         body: SafeArea(
 
           child: Center(
@@ -86,6 +87,7 @@ class _SinglePostState extends State<SinglePost> {
                           child: Padding(
                             padding: const EdgeInsets.all(20.0),
                             child: Column(
+                              mainAxisSize: MainAxisSize.min,
                               children: <Widget>[
                                 Image(
                                   image: post.file != null
@@ -153,11 +155,13 @@ class _SinglePostState extends State<SinglePost> {
                         ),
                       ],
                     ),
-                    Container(
 
-                    ),
                   ],
                 ),
+                Flexible(
+                    child: OneComment()
+                ),
+
               ],
             ),
 
@@ -169,3 +173,11 @@ class _SinglePostState extends State<SinglePost> {
 
   }
 }
+
+/*
+Column(
+                      children: <Widget>[
+                        OneComment(),
+                      ],
+                    )
+ */

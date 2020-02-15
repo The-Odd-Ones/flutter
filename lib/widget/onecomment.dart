@@ -9,8 +9,11 @@ class OneComment extends StatefulWidget {
 class _OneCommentState extends State<OneComment> {
   @override
   Widget build(BuildContext context) {
+    OneComment();
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Colors.white,
+
 
         body: Card(
           color: Colors.white,
@@ -19,7 +22,8 @@ class _OneCommentState extends State<OneComment> {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               TextField(
-                decoration: InputDecoration(labelText:'write you comment here',
+                decoration: InputDecoration(labelText:'comment here',
+
                     contentPadding: EdgeInsets.all(5),
                     border: new OutlineInputBorder(
                       borderRadius: new BorderRadius.circular(15.0),
@@ -30,7 +34,7 @@ class _OneCommentState extends State<OneComment> {
               ),
               GestureDetector(
                 child: Icon(Icons.done_all,
-                color: Colors.grey,
+                color: Colors.greenAccent,
 
                 ),
                 onTap: (){
@@ -49,7 +53,7 @@ class _OneCommentState extends State<OneComment> {
                     CircleAvatar(backgroundColor: Colors.blue,),
                     SizedBox(width:30),
 
-                    Text('comment text comment text',
+                    Text('this is a comment',
                       overflow: TextOverflow.ellipsis,
                       maxLines: 5,
 

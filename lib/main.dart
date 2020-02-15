@@ -31,7 +31,38 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return OneComment();
+    return MultiProvider(
+        providers: [
+          ChangeNotifierProvider.value(value: UserProvider()),
+          ChangeNotifierProvider.value(value: CommunityProvider()),
+          ChangeNotifierProvider.value(value: PostsProvider()),
+          ChangeNotifierProvider.value(value: EventsProvider()),
+        ],
+        child: Consumer<UserProvider>(
+          builder: (context, userProvider, _) => MaterialApp(
+            home: userProvider.isAuth
+                ? Home()
+                : FutureBuilder(
+              future: userProvider.tryAutoLogin(),
+              builder: (context, authResultSnapshot) =>
+              authResultSnapshot.connectionState ==
+                  ConnectionState.waiting
+                  ? SplashScreen()
+                  : Auth(),
+            ),
+            routes: {
+              Home.routeName: (context) => Home(),
+              Login.routeName: (context) => Login(),
+              SignUp.routeName: (context) => SignUp(),
+              Profile.routeName: (context) => Profile(),
+              Events.routeName: (context) => Events(),
+              EditProfil.routeName: (context) => EditProfil(),
+              SinglePost.routeName: (context) => SinglePost(),
+              EventP.routeName: (context) => EventP(),
+              MapPage.routeName: (context) => MapPage(),
+            },
+          ),
+        ));
   }
 }
 

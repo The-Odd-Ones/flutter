@@ -70,7 +70,7 @@ class _HomeState extends State<Home> {
       child: Scaffold(
         appBar: AppBar(
 
-            backgroundColor: Colors.lightGreen,
+            backgroundColor: Colors.greenAccent,
             elevation: 4.0,
             centerTitle: true,
          

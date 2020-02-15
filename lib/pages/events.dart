@@ -154,7 +154,7 @@ class _EventsState extends State<Events> {
       // backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text('Events'),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.lightGreen,
         centerTitle: true,
       ),
       body: Stack(

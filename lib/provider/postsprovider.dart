@@ -71,7 +71,7 @@ class PostsProvider with ChangeNotifier {
   }
 
   Future<void> addPost(SinglPost single) async {
-    final url = '192.168.137.60:8080';
+    final url = '192.168.3.207:8080';
 
     try {
       final result = await http.post(
