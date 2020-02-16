@@ -160,48 +160,48 @@ class _HomeState extends State<Home> {
                     );
                   },
                 ),
-                RaisedButton(
-                  child: Text('Add event'),
-                  onPressed: () async {
-                    showDialog(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return AlertDialog(
-                          title: Text("Add event"),
-                          content: Form(
-                            key: _formKey,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: <Widget>[
-                                TextFormField(
-                                  decoration: const InputDecoration(
-                                    hintText: 'Enter your event',
-                                    labelText: 'Event',
-                                  ),
-                                  maxLines: 5,
-                                ),
-                                TextFormField(
-                                  decoration: const InputDecoration(
-                                    labelText: 'Image',
-                                  ),
-                                  textInputAction: TextInputAction.next,
-                                ),
-                              ],
-                            ),
-                          ),
-                          actions: <Widget>[
-                            FlatButton(
-                              child: Text('Publish'),
-                              onPressed: () {
-                                Navigator.of(context).pop();
-                              },
-                            )
-                          ],
-                        );
-                      },
-                    );
-                  },
-                ),
+                // RaisedButton(
+                //   child: Text('Add event'),
+                //   onPressed: () async {
+                //     showDialog(
+                //       context: context,
+                //       builder: (BuildContext context) {
+                //         return AlertDialog(
+                //           title: Text("Add event"),
+                //           content: Form(
+                //             key: _formKey,
+                //             child: Column(
+                //               mainAxisSize: MainAxisSize.min,
+                //               children: <Widget>[
+                //                 TextFormField(
+                //                   decoration: const InputDecoration(
+                //                     hintText: 'Enter your event',
+                //                     labelText: 'Event',
+                //                   ),
+                //                   maxLines: 5,
+                //                 ),
+                //                 TextFormField(
+                //                   decoration: const InputDecoration(
+                //                     labelText: 'Image',
+                //                   ),
+                //                   textInputAction: TextInputAction.next,
+                //                 ),
+                //               ],
+                //             ),
+                //           ),
+                //           actions: <Widget>[
+                //             FlatButton(
+                //               child: Text('Publish'),
+                //               onPressed: () {
+                //                 Navigator.of(context).pop();
+                //               },
+                //             )
+                //           ],
+                //         );
+                //       },
+                //     );
+                //   },
+                // ),
               ],
             ),
             Expanded(

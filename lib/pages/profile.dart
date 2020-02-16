@@ -6,6 +6,7 @@ import '../provider/user_provider.dart';
 import '../widget/followersWidget.dart';
 import '../widget/followingWidget.dart';
 import '../widget/posts.dart';
+import 'package:community/pages/posts/postCard.dart';
 
 //import './editProfile.dar';
 class Profile extends StatefulWidget {
