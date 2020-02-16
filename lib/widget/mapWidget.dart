@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:community/pages/editProfil.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -11,28 +12,38 @@ class MapPage extends StatefulWidget {
 class _MapPageState extends State<MapPage> {
   Completer<GoogleMapController> _controller = Completer();
 
-  static const LatLng _center = const LatLng(36, 10);
-
-  void _onMapCreated(GoogleMapController controller) {
-    _controller.complete(controller);
-  }
+  static const LatLng _center = const LatLng(42, 11);
 
   MapType _currentMapType = MapType.normal;
 
-  // void _onMapTypeButtonPressed() {
-  //   setState(() {
-  //     _currentMapType = _currentMapType == MapType.normal
-  //         ? MapType.satellite
-  //         : MapType.normal;
-  //   });
-  // }
+  List<Marker> allMarkers = [];
+
+  @override
+  void initState() {
+    final location = ModalRoute.of(context).settings.arguments as List;
+    // print(location);
+
+    final LatLng latlag = LatLng(location[0], location[1]);
+    super.initState();
+    allMarkers.add(
+      Marker(
+        markerId: MarkerId('myMarker'),
+        draggable: false,
+        onTap: () {
+          print('Marker Tapped');
+        },
+        position: latlag,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final location = ModalRoute.of(context).settings.arguments as List;
-    print(location);
+    // print(location);
 
     final LatLng latlag = LatLng(location[0], location[1]);
+    // final LatLng latlag = LatLng(55, 50);
 
     return MaterialApp(
       home: Scaffold(
@@ -44,25 +55,16 @@ class _MapPageState extends State<MapPage> {
         body: Stack(
           children: <Widget>[
             GoogleMap(
-              onMapCreated: _onMapCreated,
+              markers: Set.from(allMarkers),
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
               initialCameraPosition: CameraPosition(
                 target: latlag,
                 zoom: 5.0,
               ),
               mapType: _currentMapType,
             ),
-            // Padding(
-            //   padding: const EdgeInsets.all(16.0),
-            //   child: Align(
-            //     alignment: Alignment.topRight,
-            //     child: FloatingActionButton(
-            //       onPressed: _onMapTypeButtonPressed,
-            //       materialTapTargetSize: MaterialTapTargetSize.padded,
-            //       backgroundColor: Colors.green,
-            //       child: const Icon(Icons.map, size: 36.0),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),
