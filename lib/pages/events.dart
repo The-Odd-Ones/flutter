@@ -76,7 +76,7 @@ class _EventsState extends State<Events> {
           image: event.file != null
               ? NetworkImage(event.file)
               : NetworkImage(
-                  'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
+              'https://sciences.ucf.edu/psychology/wp-content/uploads/sites/63/2019/09/No-Image-Available.png'),
           fit: BoxFit.cover,
         ),
       ),
@@ -154,7 +154,7 @@ class _EventsState extends State<Events> {
       // backgroundColor: Colors.grey[100],
       appBar: AppBar(
         title: Text('Events'),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.lightGreen,
         centerTitle: true,
       ),
       body: Stack(
@@ -165,7 +165,7 @@ class _EventsState extends State<Events> {
                 children: <Widget>[
                   Column(
                     children:
-                        events.map((event) => buildEvents(event)).toList(),
+                    events.map((event) => buildEvents(event)).toList(),
                   ),
                 ],
               ),

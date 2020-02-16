@@ -11,27 +11,29 @@ class PostCard extends StatefulWidget {
 }
 
 class _PostCardState extends State<PostCard> {
-  bool liked = false;
-  var likeCol = '';
-  verifLiked() {
-    if (liked = true) {
-      return Icon(
-        Icons.favorite_border,
-        size: 20,
-        color: Colors.red,
-      );
-    } else {
-      return Icon(
-        Icons.favorite_border,
-        size: 20,
-        color: Colors.grey,
-      );
-    }
-  }
-
-  //
-
   Widget buildPosts(post) {
+    bool liked = false;
+
+    _pressed() {
+      setState(() {
+        liked = !liked;
+      });
+    }
+
+    IconButton heartButton = IconButton(
+      icon: Icon(liked ? Icons.favorite : Icons.favorite_border,
+          color: liked ? Colors.red : Colors.grey),
+      onPressed: () => _pressed(),
+    );
+
+    IconButton commentButton = IconButton(
+      icon: Icon(
+        Icons.chat_bubble_outline,
+        color: Colors.grey,
+      ),
+      onPressed: () {},
+    );
+
     return Card(
       color: Colors.white,
       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 25),
@@ -75,15 +77,14 @@ class _PostCardState extends State<PostCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
-                verifLiked(),
-                Icon(
-                  Icons.share,
-                  color: Colors.grey,
+                ListTile(
+                  leading: Row(
+                    children: <Widget>[
+                      heartButton,
+                      commentButton,
+                    ],
+                  ),
                 ),
-                Icon(
-                  Icons.comment,
-                  color: Colors.grey,
-                )
               ],
             ),
           ],
