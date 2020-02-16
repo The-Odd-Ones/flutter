@@ -97,18 +97,14 @@ class _HomeState extends State<Home> {
         drawer: AppDrawer(),
         body: Column(
           children: <Widget>[
-            // Text("data"),
-            // RaisedButton(
-            //   child: Text('data'),
-            //   onPressed: () async {
-            //     final result =
-            //         Provider.of<CommunityProvider>(context, listen: false)
-            //             .commuinities[1];
-            //     print(result);
-            //     await Provider.of<PostsProvider>(context, listen: false)
-            //         .getPosts(result);
-            //   },
-            // ),
+            Text("data"),
+            RaisedButton(
+              child: Text('data'),
+              onPressed: () async {
+                await Provider.of<PostsProvider>(context, listen: false)
+                    .getCommentsOnPost('5e457fd55f257c3da81cb24c', 'Main');
+              },
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
